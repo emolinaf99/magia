@@ -1,0 +1,100 @@
+#header {
+    width: 100vw;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow-x: hidden;
+    font-weight: 300;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    height: 70vh;
+    z-index: 999998;
+}
+
+.contenedorHeader {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    z-index: 99;
+}
+
+#bloqueMenuHamburguesa {
+    display: none;
+}
+
+.bloqueExterno {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#burgerMenu {
+    font-size: 30px;
+    color: white;
+    display: none;
+}
+
+.logo {
+    width:100px ;
+}
+
+.menu {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menu a {
+    width: 10rem;
+    text-align: center;
+}
+
+.item {
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+.item:hover {
+    color: #D95A4D ;
+}
+
+.imgFondoClaro {
+    display: none;
+}
+
+.bloqueTitle {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size:60px;
+    font-weight: 300;
+}
+
+.rel3 {
+    top: 3rem;
+    position: relative;
+    font-size: 25px;
+}
+
+.t2 {
+    top: 3rem;
+    position: relative;
+    font-size: 35px;
+}

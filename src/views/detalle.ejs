@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ('./partials/head.ejs') %> 
+        <title>Detalle - Serenity</title>
+    </head>
+     
+    <body>
+        <header id="header">
+            <%- include ('./partials/header.ejs') %>
+            <div class="bloqueTitle t2">
+                <p>Detalle</p>
+            </div>
+            
+        </header>
+         
+        <main class="mainIndex">
+
+            <section class="contenedorMenu">
+                <section class="detalleContenedor">
+                    <div class="imagesArea">
+                        <div class="blockImages">
+                            <div class="imgPrincipal">
+                                <img src="/images/rojoCirculo.jpg" alt="">
+                            </div>
+                            <div class="otrasFotos">
+                                <img src="/images/rojoPeq.jpg" alt="">
+                                <img src="/images/rojoCirculo.jpg" alt="">
+                                <img src="/images/amarilloPeq.jpg" alt="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="infoProducto">
+                        <div class="bloqueInfoProd">
+                            <div class="titleAndPrice">
+                                <h1>Vela 1 250gr</h1>
+                                <p>$50.000</p>
+                            </div>
+                            <div class="descriptionProduct">
+                                <p>ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi a</p>
+                            </div>
+
+                            <div class="descriptionProduct mg2">
+                                <p class="bold">Aromas Disponibles:</p>
+                                <ul>
+                                    <% if (aromas.length > 0) { %>
+                                     <% aromas.forEach(aroma => { %>
+                                        <li><%= aroma.name %></li>
+                                     <% }) %>
+                                    <% } %>
+                                    
+                                </ul>
+                            </div>  
+
+                            <div class="descriptionProduct">
+                                <p>ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi a</p>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </section>
+            </section>
+
+             
+        </main>
+    </body>
+
+    <footer>
+        <%- include ('./partials/footer.ejs') %>
+    </footer>
+
+     
+</html>
+
+<script>
+    const headerTotal = document.getElementById('header')
+    let pathname = window.location.pathname
+    const urlImage  = '/images/nuevaVela.jpg'
+
+    if(pathname == '/detalle') {
+        headerTotal.style.backgroundImage = `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0,0,0,0.3)
+        ),
+        url('${urlImage}')`
+
+        headerTotal.style.height = '25vh'
+    }
+
+</script>

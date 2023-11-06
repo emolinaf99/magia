@@ -1,0 +1,253 @@
+.footer {
+    margin-top: 20rem;
+}
+
+.distribuidor {
+    margin-right: 5vw;
+    margin-left: 5vw;
+    border-top: 1px solid #D95A4D;
+    padding-top:5vw;
+}
+
+.info-distribuidor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    font-size: 12px;
+    padding: 0vw 2vw;
+}
+
+h4 {
+    font-size: 20px;
+    color:#D95A4D;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.p-distribuidor {
+    color:#666;
+    line-height: 18px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    padding:0vw 10vw;
+    text-align: left;
+    margin-bottom: 7vw;
+    margin-top: 5vw;
+}
+
+.b {
+    border-bottom: #D95A4D 1px solid;
+    padding: 0rem 1rem;
+    width: 80vw;
+    margin-bottom: 0.7rem;
+    padding:0.2rem 0rem;
+    background-color: transparent;
+}
+
+.b:focus {
+    outline: none;
+}
+
+.formulario label {
+    display: block;
+    color:#D95A4D;
+    font-weight: 400;
+    text-align: left;
+    padding-bottom: 0.2rem;
+    font-size: 12px;
+}
+
+.enviar-block {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.enviar {
+    background-color:#D95A4D;
+    font-weight: bold;
+    padding:0.5rem;
+    color: white;
+    display: block;
+    cursor: pointer;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 0 2px 3px rgba(0 0 0 / 0.15);
+    font-size: 12px;
+}
+
+.enviar:hover {
+    transform: scale(1.05);
+}
+
+.flor {
+    width:10vw;
+}
+
+.block-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
+}
+
+.left-block {
+    width: 33vw;
+    display: flex;
+    border-top: 1px solid #D95A4D;
+    padding: 1rem 0;
+}
+
+.redes {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    gap:1rem;
+    padding-left: 1rem;
+}
+
+.redes a {
+    color:#D95A4D;
+}
+
+
+
+.right-block {
+    width: 33vw;
+    display: flex;
+    border-top: 1px solid #D95A4D;
+}
+
+.wpp i{
+    font-size: 40px;
+    position: fixed;
+    right:10px;
+    bottom: 10px;
+    color: #D95A4D;
+    z-index: 10000000000000000000;
+}
+
+.wpp i:hover {
+    transform: scale(1.2);
+}
+
+@media screen and (min-width:769px) {
+
+    .info-distribuidor {
+        padding:0vw 10vw;
+        font-size: 14px;
+        gap: 0.7rem;
+    }
+    
+    h4 {
+        font-size: 30px;
+    }
+    
+    .p-distribuidor {
+        line-height: 20px;
+    }
+
+    .formulario {
+        margin-bottom: 3vw;
+        padding:0vw 25vw;
+    }
+
+    .b {
+        width: 50vw;
+        margin-bottom: 1rem;
+    }
+
+    .formulario label {
+        font-size: 16px;
+        padding-bottom: 0.2rem;
+    }
+
+    .enviar-block {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
+
+    .enviar {
+        font-size: 14px;
+    }
+
+    .redes {
+        padding-left: 2rem;
+        font-size: 30px;
+    }
+
+    .wpp i{
+        font-size: 50px;
+        position: fixed;
+        right:20px;
+        bottom: 20px;
+        color: #D95A4D;
+    }
+
+}
+
+@media screen and (min-width:1279px) {
+    
+    .info-distribuidor {
+        padding:0vw 20vw;
+        font-size: 16px;
+        gap: 1rem;
+    }
+    
+    h4 {
+        font-size: 40px;
+    }
+    
+    .p-distribuidor {
+        line-height: 22px;
+    }
+
+    .formulario {
+        margin-bottom: 5vw;
+        padding:0vw 35vw;
+    }
+
+    .b {
+        width: 30vw;
+        margin-bottom: 1rem;
+    }
+
+    .formulario label {
+        font-size: 16px;
+        padding-bottom: 0.3rem;
+    }
+
+    .enviar-block {
+        padding-top: 1rem;
+    }
+
+    .enviar {
+        font-size: 16px;
+    }
+
+    .redes {
+        padding-left: 2rem;
+        font-size: 30px;
+    }
+
+    .wpp i{
+        font-size: 60px;
+        position: fixed;
+        right:20px;
+        bottom: 20px;
+        color: #D95A4D;
+    }
+}
+

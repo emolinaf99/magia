@@ -1,0 +1,60 @@
+
+<div class="contenedorHeader">
+    <label for="menu" class="bloqueExterno" id="bloqueMenuHamburguesa">
+        <i class="fa-solid fa-bars burgerMenuIcon" id="burgerMenu"></i>
+    </label>
+    <div class="bloqueExterno">
+        <img class="imgFondoOscuro logo" src="/images/LOGO_CIRCULAR_BLANCO.png"  alt="">
+        <img class="imgFondoClaro logo" src="/images/LOGO_CIRCULAR_ROJO.png" alt="">
+    </div>
+    
+    <ul class="menu">
+        <a href="/"><li class="item">Inicio</li></a>
+        <a href="/productos"><li class="item">Productos</li></a>
+        <a href=""><li class="item">Nosotros</li></a>
+    </ul>
+    <div class="bloqueExterno">
+        
+    </div>
+
+    
+
+</div>
+
+
+<!-- Script para  cuando escuche scroll cambie de header -->
+<script>
+    let header = document.querySelector('.contenedorHeader')
+    let logoFondoClaro= document.querySelector('.imgFondoClaro')
+    let logoFondoOscuro = document.querySelector('.imgFondoOscuro')
+    let items = document.querySelectorAll('.item')
+    let burgerMenu = document.querySelector('#burgerMenu')
+
+    window.addEventListener('scroll',() => {
+        
+        let scroll = window.scrollY
+
+        if(scroll > 15) {
+            
+            header.style.backgroundColor = '#FFF9EE'
+            logoFondoClaro.style.display = 'flex'
+            logoFondoOscuro.style.display = 'none'
+
+            items.forEach(item => {
+                item.style.color = '#D95A4D'
+            })
+           
+            burgerMenu.style.color = '#D95A4D'
+        } else {
+            header.style.backgroundColor = 'transparent'
+            logoFondoClaro.style.display = 'none'
+            logoFondoOscuro.style.display = 'flex'
+            
+            items.forEach(item => {
+                item.style.color = 'white'
+            })
+            burgerMenu.style.color = 'white'
+        }
+    })
+    
+</script>

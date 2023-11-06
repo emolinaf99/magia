@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1,
+        "name": "Vela Luxé",
+        "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "tamaño": "85 gr",
+        "precio": 25000,
+        "aroma": 2,
+        "categoria": 1
+        
+    }
+
+]

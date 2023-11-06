@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ('./partials/head.ejs') %> 
+        <title>Productos</title>
+    </head>
+     
+    <body>
+        <header id="header">
+            <%- include ('./partials/header.ejs') %>
+            <div class="bloqueTitle t2">
+                <p>Velas</p>
+            </div>
+            
+        </header>
+         
+        <main class="mainIndex">
+
+            <section class="contenedorMenu">
+                <div class="contenedorProductos">
+                    <a class="bloqueProduct" href="/detalle">
+                        <img src="/images/rojoCirculo.jpg" alt="">
+                        <div class="infoProduct">
+                            <p>Vela 1</p>
+                            <p class="bold">$50.000</p>
+                        </div>
+                        
+                    </a>
+                    <a class="bloqueProduct">
+                        <img src="/images/rojoPeq.jpg" alt="">
+                        <div class="infoProduct">
+                            <p>Vela 2</p>
+                            <p class="bold">$50.000</p>
+                        </div>
+                        
+                    </a>
+                    <a class="bloqueProduct">
+                        <img src="/images/amarilloPeq.jpg" alt="">
+                        <div class="infoProduct">
+                            <p>Vela 3</p>
+                            <p class="bold">$50.000</p>
+                        </div>
+                        
+                    </a>
+                </div>
+            </section>
+
+             
+        </main>
+    </body>
+
+    <footer>
+        <%- include ('./partials/footer.ejs') %>
+    </footer>
+
+     
+</html>
+
+<script>
+    const headerTotal = document.getElementById('header')
+    let pathname = window.location.pathname
+    const urlImage  = '/images/velaCerca.jpg'
+
+    if(pathname == '/productos') {
+        headerTotal.style.backgroundImage = `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0,0,0,0.3)
+        ),
+        url('${urlImage}')`
+
+        headerTotal.style.height = '25vh'
+    }
+
+</script>

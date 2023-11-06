@@ -1,0 +1,36 @@
+.contenedorProductos {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    column-gap:1rem;
+}
+
+.bloqueProduct {
+    width: 100%;
+    cursor: pointer;
+    color: black;
+}
+
+.bloqueProduct:hover {
+    color: black;
+    box-shadow: 0 5px 10px rgba(0 0 0 / 0.30);
+}
+
+.bloqueProduct img {
+    width: 100%;
+}
+
+.bold {
+    font-weight: 500;
+}
+
+.infoProduct {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 0.2rem;
+    flex-direction: column;
+    justify-items: flex-start;
+    align-items: flex-start;
+}
+

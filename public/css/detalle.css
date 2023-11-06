@@ -1,0 +1,101 @@
+.detalleContenedor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.imagesArea {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.blockImages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.imgPrincipal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgPrincipal img {
+    width: 400px;
+}
+
+.otrasFotos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.3rem;
+}
+
+.otrasFotos img {
+    width: 130px;
+}
+
+.infoProducto {
+    width: 50%;
+}
+
+.bloqueInfoProd {
+    width: 80%;
+    background-color: transparent;
+    height: 70vh;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.titleAndPrice {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.3rem;
+}
+
+.titleAndPrice h1 {
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.titleAndPrice p {
+    font-weight: 600;
+}
+
+.descriptionProduct {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.3rem;
+
+}
+
+.descriptionProduct ul li {
+    list-style-type: disc;
+}
+
+.mg2 {
+    margin: 2rem 1rem;
+}

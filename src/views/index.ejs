@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ('./partials/head.ejs') %> 
+        <title>Inicio</title>
+    </head>
+     
+    <body>
+        <header id="header">
+            <%- include ('./partials/header.ejs') %>
+            
+        </header>
+        <section class="contenedor">
+            <div class="bloque-texto">
+                <p class="animation">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                </p>
+            </div>
+        </section>
+         
+        <main class="mainIndex">
+            <section class="sectionGeneralInfo">
+                <div class="blockText">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                </div>
+               
+            </section>
+            <section class="contenedorMenu">
+                
+                
+                
+            </section>
+
+            <section class="contenedorMenu">
+                <div class="contenedor2Vacios">
+                    <div class="contenedoVacio"></div>
+                    <h3>Síguenos en Instagram</h3>
+                    <div class="contenedoVacio"></div>
+                </div>
+                
+                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                <div class="elfsight-app-f1fd211d-6edf-475a-9e67-587e8ca1d833" data-elfsight-app-lazy></div>
+            </section>
+
+             
+        </main>
+    </body>
+
+    <footer>
+        <%- include ('./partials/footer.ejs') %>
+    </footer>
+
+     
+</html>
+
+<script>
+    const headerTotal = document.getElementById('header')
+    let pathname = window.location.pathname
+    const urlImage  = '/images/bannerInicio.jpg'
+
+    if(pathname == '/') {
+        headerTotal.style.backgroundImage = `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0,0,0,0.3)
+        ),
+        url('${urlImage}')`
+
+        headerTotal.style.height = '70vh'
+    }
+
+</script>
