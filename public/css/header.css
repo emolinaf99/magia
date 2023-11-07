@@ -314,14 +314,14 @@
     }
     
     .listaProductos li {
-        background-color: #D95A4D;
+        background-color: #FFF9EE;
         padding: 0.5rem 0.5rem;
         cursor: pointer;
         text-align: left;
     }
     
     .listaProductos li:hover {
-        background-color: #be5448;
+        background-color: #f7eede;
         
     }
     
