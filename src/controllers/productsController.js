@@ -1,20 +1,34 @@
-const producos = require("../models/products.model"); 
-const categorias = require("../models/categories.model"); 
-const aromas = require("../models/scents.model"); 
+const products = require("../models/products.model"); 
+const categories = require("../models/categories.model"); 
+const scentses = require("../models/scents.model"); 
 
 const {unlinkSync} = require('fs');
 const {resolve,path} = require('path');
 
 const controller = {
-    vistaProductos: (req,res) => {
-        res.render('productos')
-        console.log(JSON.stringify(req.body));
+    vistaProductos: async (req,res) => {
+        let productos = products.all()
+        let categorias = categories.all()
+        let productosFiltrados = productos.filter(product => product.categoria == req.params.idCategoria)
+
+        return res.render('productos', {
+            productos: productosFiltrados,
+            categorias: categorias,
+            category: req.params.idCategoria
+        })
+        
     },
 
     detalleProducto: (req,res) => {
-        let todosLosAromas = aromas.all()
-        res.render('detalle', {
-            aromas: todosLosAromas
+        let todosLosAromas = scentses.all()
+        let categorias = categories.all()
+        let productos = products.all()
+        let productoEncontrado = productos.find(producto => producto.id == req.params.idProducto)
+
+        return res.render('detalle', {
+            aromas: todosLosAromas,
+            categorias: categorias,
+            producto: productoEncontrado
         })
     }
 }

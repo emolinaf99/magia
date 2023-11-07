@@ -2,14 +2,27 @@
 <html lang="en">
     <head>
         <%- include ('./partials/head.ejs') %> 
-        <title>Productos</title>
+        <% if (categorias.length > 0) { %>
+            <% let categoriaEncontrada = categorias.find(categoria => categoria.id == category) %>
+            <% if (categoriaEncontrada) { %>
+                <title><%= categoriaEncontrada.name %></title>
+               
+            <% } %>
+           <% } %>
+        
     </head>
      
     <body>
         <header id="header">
             <%- include ('./partials/header.ejs') %>
             <div class="bloqueTitle t2">
-                <p>Velas</p>
+                <% if (categorias.length > 0) { %>
+                 <% let categoriaEncontrada = categorias.find(categoria => categoria.id == category) %>
+                 <% if (categoriaEncontrada) { %>
+                    <p><%= categoriaEncontrada.name %></p>
+                 <% } %>
+                <% } %>
+                
             </div>
             
         </header>
@@ -18,30 +31,20 @@
 
             <section class="contenedorMenu">
                 <div class="contenedorProductos">
-                    <a class="bloqueProduct" href="/detalle">
-                        <img src="/images/rojoCirculo.jpg" alt="">
-                        <div class="infoProduct">
-                            <p>Vela 1</p>
-                            <p class="bold">$50.000</p>
-                        </div>
-                        
-                    </a>
-                    <a class="bloqueProduct">
-                        <img src="/images/rojoPeq.jpg" alt="">
-                        <div class="infoProduct">
-                            <p>Vela 2</p>
-                            <p class="bold">$50.000</p>
-                        </div>
-                        
-                    </a>
-                    <a class="bloqueProduct">
-                        <img src="/images/amarilloPeq.jpg" alt="">
-                        <div class="infoProduct">
-                            <p>Vela 3</p>
-                            <p class="bold">$50.000</p>
-                        </div>
-                        
-                    </a>
+                    <% if (productos.length > 0) { %>
+                        <% productos.forEach(producto => { %>
+                            <a class="bloqueProduct" href="/detalle/<%= producto.id %>">
+                                <img src="<%= producto.imagenPrincipal %>" alt="">
+                                <div class="infoProduct">
+                                    <p><%= producto.name %></p>
+                                    <p class="bold">$<%= producto.precio %></p>
+                                </div>
+                            </a>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No hay productos disponibles en esta categoria</p>
+                    <% } %>
+                    
                 </div>
             </section>
 
@@ -61,14 +64,14 @@
     let pathname = window.location.pathname
     const urlImage  = '/images/velaCerca.jpg'
 
-    if(pathname == '/productos') {
+    if(pathname.includes('/productos') ) {
         headerTotal.style.backgroundImage = `linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0,0,0,0.3)
         ),
         url('${urlImage}')`
 
-        headerTotal.style.height = '25vh'
+        headerTotal.style.height = '13.5rem'
     }
 
 </script>

@@ -56,6 +56,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position:relative;
 }
 
 .menu a {
@@ -69,6 +70,7 @@
     font-weight: 600;
     cursor: pointer;
     color: white;
+    padding: 0.5rem;
 }
 
 .item:hover {
@@ -97,4 +99,33 @@
     top: 3rem;
     position: relative;
     font-size: 35px;
+}
+
+.listaProductos {
+    background-color: transparent;
+    position: absolute;
+    top: 3rem;
+    width: 10rem;
+    color: white;
+    display:none;
+}
+
+.listaProductos li {
+    background-color: #D95A4D;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.listaProductos li:hover {
+    background-color: #be5448;
+    
+}
+
+.contenedorProd {
+    position: relative;
+}
+
+.flecha {
+    margin-left: 0.8rem;
 }

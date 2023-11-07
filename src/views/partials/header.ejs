@@ -10,7 +10,17 @@
     
     <ul class="menu">
         <a href="/"><li class="item">Inicio</li></a>
-        <a href="/productos"><li class="item">Productos</li></a>
+        <div class="contenedorProd">
+            <li class="item" id="productosOpt">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
+            <ul class="listaProductos">
+                <% if (categorias) { %>
+                    <% categorias.forEach(categoria => { %>
+                        <a href="/productos/<%= categoria.id %>"><li><%= categoria.name %></li></a>
+                    <% }) %>
+                <% } %>
+            </ul>
+        </div>
+        
         <a href=""><li class="item">Nosotros</li></a>
     </ul>
     <div class="bloqueExterno">
@@ -21,6 +31,25 @@
 
 </div>
 
+<!-- Script para cuando productos escuche click-->
+<script>
+    const optProductos = document.getElementById('productosOpt')
+    const listarProductos = document.querySelector('.listaProductos')
+    
+
+    optProductos.addEventListener('click',() => {
+        if(listarProductos.style.display == 'block') {
+            listarProductos.style.display = 'none'
+        } else {
+            listarProductos.style.display = 'block'
+        }
+        
+    })
+
+    
+
+    
+</script>
 
 <!-- Script para  cuando escuche scroll cambie de header -->
 <script>

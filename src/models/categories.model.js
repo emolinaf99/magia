@@ -6,7 +6,7 @@ const Category = {
     FileName:'./src/data/categories.json',
     
     all: function(){
-        return JSON.parse(fs.readFileSync(Product.FileName, 'utf-8'));
+        return JSON.parse(fs.readFileSync(Category.FileName, 'utf-8'));
     },
     generateId: function(){
         let allCategories = Category.all();

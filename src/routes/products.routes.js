@@ -3,10 +3,8 @@ const router = Router();
 const controller = require('../controllers/productsController')
 
 
-router.get("/productos", controller.vistaProductos);
-router.get("/detalle", controller.detalleProducto);
-
-
+router.get("/productos/:idCategoria", controller.vistaProductos);
+router.get("/detalle/:idProducto", controller.detalleProducto);
 
 
 

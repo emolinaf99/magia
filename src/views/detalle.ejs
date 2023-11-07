@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <%- include ('./partials/head.ejs') %> 
-        <title>Detalle - Serenity</title>
+        <title>Detalle - <%= producto.name %></title>
     </head>
      
     <body>
@@ -34,11 +34,11 @@
                     <div class="infoProducto">
                         <div class="bloqueInfoProd">
                             <div class="titleAndPrice">
-                                <h1>Vela 1 250gr</h1>
-                                <p>$50.000</p>
+                                <h1><%= producto.name %></h1>
+                                <p>$<%= producto.precio %></p>
                             </div>
                             <div class="descriptionProduct">
-                                <p>ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi a</p>
+                                <p><%= producto.descripcion %></p>
                             </div>
 
                             <div class="descriptionProduct mg2">
@@ -79,14 +79,14 @@
     let pathname = window.location.pathname
     const urlImage  = '/images/nuevaVela.jpg'
 
-    if(pathname == '/detalle') {
+    if(pathname.includes('/detalle') ) {
         headerTotal.style.backgroundImage = `linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0,0,0,0.3)
         ),
         url('${urlImage}')`
 
-        headerTotal.style.height = '25vh'
+        headerTotal.style.height = '13.5rem'
     }
 
 </script>
