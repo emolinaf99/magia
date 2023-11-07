@@ -91,7 +91,7 @@ h4 {
 }
 
 .flor {
-    width:30%;
+    width:30vw;
 }
 
 .block-footer {
@@ -146,7 +146,7 @@ h4 {
     transform: scale(1.2);
 }
 
-@media screen and (min-width:769px) {
+@media screen and (min-width:768px) {
 
     .left-block {
         width: 30%;
@@ -198,17 +198,9 @@ h4 {
         font-size: 30px;
     }
 
-    .wpp i{
-        font-size: 50px;
-        position: fixed;
-        right:20px;
-        bottom: 20px;
-        color: #D95A4D;
-    }
-
 }
 
-@media screen and (min-width:1279px) {
+@media screen and (min-width:1280px) {
     
     .info-distribuidor {
         padding:0vw 20vw;
@@ -253,11 +245,12 @@ h4 {
     }
 
     .wpp i{
-        font-size: 60px;
-        position: fixed;
-        right:20px;
-        bottom: 20px;
-        color: #D95A4D;
+        left: 90%;
+        bottom: 2rem;
+    }
+
+    .flor {
+        width: 10vw;
     }
 }
 
