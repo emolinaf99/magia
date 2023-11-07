@@ -21,12 +21,12 @@
                     <div class="imagesArea">
                         <div class="blockImages">
                             <div class="imgPrincipal">
-                                <img src="/images/rojoCirculo.jpg" alt="">
+                                <img src="/images/rojoCirculo.jpg" alt="" id="imagenPrincipal">
                             </div>
                             <div class="otrasFotos">
-                                <img src="/images/rojoPeq.jpg" alt="">
-                                <img src="/images/rojoCirculo.jpg" alt="">
-                                <img src="/images/amarilloPeq.jpg" alt="">
+                                <img src="/images/rojoCirculo.jpg" alt="" id="imagenPrincipalPequeña">
+                                <img src="/images/rojoPeq.jpg" alt="" id="segundaImagen">
+                                <img src="/images/amarilloPeq.jpg" alt="" id="terceraImagen">
                             </div>
                         </div>
                         
@@ -74,6 +74,51 @@
      
 </html>
 
+<script>
+    const fotoPrincipalGrande = document.getElementById('imagenPrincipal')
+    const fotoPrincipalPequeña = document.getElementById('imagenPrincipalPequeña')
+    const segundaFoto = document.getElementById('segundaImagen')
+    const terceraFoto = document.getElementById('terceraImagen')
+
+
+    function resaltarFoto(foto, array) { // funcion para resaltar algo de los demas, en este caso fotos
+
+        let otroArray = array.filter((e) => {
+            if(e != foto) {
+                return e
+            }
+        })
+
+        otroArray.forEach((e) => {
+            e.style.border = '0px solid black'
+        })
+
+        foto.style.border = '2px solid black'
+    }
+
+
+    function cambiarFotosDetalleProducto(fotoPrincipalGrande, fotoPrincipalPequeña, segundaFoto, terceraFoto) { 
+        let arrayFotosCambiantes = [fotoPrincipalPequeña, segundaFoto, terceraFoto]
+
+        arrayFotosCambiantes.forEach(foto => {
+
+            let fotoSRC = foto.src
+
+            foto.addEventListener('click',() => {
+                fotoPrincipalGrande.src = fotoSRC
+
+                resaltarFoto(foto, arrayFotosCambiantes)
+                
+            })
+        })
+
+    }
+
+    cambiarFotosDetalleProducto(fotoPrincipalGrande,fotoPrincipalPequeña, segundaFoto, terceraFoto  ) 
+
+</script>
+
+<!-- Script para poner la imagen del header al cargar la pagina-->
 <script>
     const headerTotal = document.getElementById('header')
     let pathname = window.location.pathname
