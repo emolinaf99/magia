@@ -1,13 +1,13 @@
 .detalleContenedor {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    width: 100%;
+    width: 100vw;
 }
 
 .imagesArea {
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,7 +20,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .imgPrincipal {
@@ -32,7 +32,7 @@
 }
 
 .imgPrincipal img {
-    width: 400px;
+    width: 95%;
 }
 
 .otrasFotos {
@@ -40,22 +40,23 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 95%;
     gap: 0.3rem;
 }
 
 .otrasFotos img {
-    width: 130px;
+    width: 32.6%;
 }
 
 .infoProducto {
-    width: 50%;
+    width: 100%;
+    padding: 1rem;
 }
 
 .bloqueInfoProd {
-    width: 80%;
+    width: 100%;
     background-color: transparent;
-    height: 70vh;
+    height: fit-content;
     padding: 0.5rem 1rem;
     display: flex;
     flex-direction: column;
@@ -98,4 +99,206 @@
 
 .mg2 {
     margin: 2rem 1rem;
+}
+
+@media screen and (min-width:768px) {
+    .detalleContenedor {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .imagesArea {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .blockImages {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .imgPrincipal {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .imgPrincipal img {
+        width: 90%;
+    }
+    
+    .otrasFotos {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        gap: 0.3rem;
+    }
+    
+    .otrasFotos img {
+        width: 33%;
+    }
+    
+    .infoProducto {
+        width: 50%;
+    }
+    
+    .bloqueInfoProd {
+        width: 100%;
+        background-color: transparent;
+        height: fit-content;
+        padding: 0.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    
+    .titleAndPrice {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .titleAndPrice h1 {
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+    
+    .titleAndPrice p {
+        font-weight: 600;
+    }
+    
+    .descriptionProduct {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.3rem;
+    
+    }
+    
+    .descriptionProduct ul li {
+        list-style-type: disc;
+    }
+}
+
+@media screen and (min-width:1280px) {
+    .detalleContenedor {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .imagesArea {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .blockImages {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .imgPrincipal {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .imgPrincipal img {
+        width: 400px;
+    }
+    
+    .otrasFotos {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        gap: 0.3rem;
+    }
+    
+    .otrasFotos img {
+        width: 130px;
+    }
+    
+    .infoProducto {
+        width: 50%;
+    }
+    
+    .bloqueInfoProd {
+        width: 80%;
+        background-color: transparent;
+        height: 70vh;
+        padding: 0.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+    
+    .titleAndPrice {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.3rem;
+    }
+    
+    .titleAndPrice h1 {
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+    
+    .titleAndPrice p {
+        font-weight: 600;
+    }
+    
+    .descriptionProduct {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.3rem;
+    
+    }
+    
+    .descriptionProduct ul li {
+        list-style-type: disc;
+    }
+    
+    
 }

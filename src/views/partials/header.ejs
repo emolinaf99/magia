@@ -11,8 +11,8 @@
     <ul class="menu">
         <a href="/"><li class="item">Inicio</li></a>
         <div class="contenedorProd">
-            <li class="item" id="productosOpt">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
-            <ul class="listaProductos">
+            <li class="item" id="productosOptDesktop">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
+            <ul class="listaProductos" id="listaProductosDesktop">
                 <% if (categorias) { %>
                     <% categorias.forEach(categoria => { %>
                         <a href="/productos/<%= categoria.id %>"><li><%= categoria.name %></li></a>
@@ -23,19 +23,67 @@
         
         <a href=""><li class="item">Nosotros</li></a>
     </ul>
+
+    
     <div class="bloqueExterno">
-        
+        <p></p>
     </div>
 
     
 
 </div>
 
+<ul class="menu" id="menuResponsive">
+        <a href="/"><li class="itemMobile">Inicio</li></a>
+        <div class="contenedorProd">
+            <li class="itemMobile" id="productosOptMobile">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
+            <ul class="listaProductos" id="listaProductosMobile">
+                <% if (categorias) { %>
+                    <% categorias.forEach(categoria => { %>
+                        <a href="/productos/<%= categoria.id %>"><li><%= categoria.name %></li></a>
+                    <% }) %>
+                <% } %>
+            </ul>
+        </div>
+        
+        <a href=""><li class="itemMobile">Nosotros</li></a>
+    </ul>
+
 <!-- Script para cuando productos escuche click-->
 <script>
-    const optProductos = document.getElementById('productosOpt')
-    const listarProductos = document.querySelector('.listaProductos')
+    const optProductosMobile = document.getElementById('productosOptMobile')
+    const listarProductosMobile = document.querySelector('#listaProductosMobile')
+    const optProductos = document.getElementById('productosOptDesktop')
+    const listarProductos = document.querySelector('#listaProductosDesktop')
+    const menuHamburguesa = document.querySelector('#burgerMenu')
+    const listaProductos = document.querySelector('#menuResponsive')
+    const logoRojo = document.querySelector('.imgFondoClaro')
+    const logoBlanco = document.querySelector('.imgFondoOscuro')
     
+
+    menuHamburguesa.addEventListener('click', () => {
+
+        if(!listaProductos.classList.contains('activeMain')) {
+            listaProductos.classList.add('activeMain')
+            listaProductos.style.top = '-1rem'
+            header.style.backgroundColor = '#FFF9EE'
+            logoRojo.style.display = 'flex'
+            logoBlanco.style.display = 'none'
+            menuHamburguesa.style.color = '#D95A4D'
+           
+
+        } else {
+
+            listaProductos.classList.remove('activeMain')
+            listaProductos.style.top = '-70%'
+            header.style.backgroundColor = 'transparent'
+            logoRojo.style.display = 'none'
+            logoBlanco.style.display = 'flex'
+            menuHamburguesa.style.color = 'white'
+            
+        }
+        
+    })
 
     optProductos.addEventListener('click',() => {
         if(listarProductos.style.display == 'block') {
@@ -43,8 +91,17 @@
         } else {
             listarProductos.style.display = 'block'
         }
-        
     })
+
+    optProductosMobile.addEventListener('click',() => {
+        if(listarProductosMobile.style.display == 'block') {
+            listarProductosMobile.style.display = 'none'
+        } else {
+            listarProductosMobile.style.display = 'block'
+        }
+    })
+
+
 
     
 
@@ -64,9 +121,9 @@
         let scroll = window.scrollY
 
         if(scroll > 15) {
-            
+
             header.style.backgroundColor = '#FFF9EE'
-            logoFondoClaro.style.display = 'flex'
+            logoFondoClaro.style.display = 'block'
             logoFondoOscuro.style.display = 'none'
 
             items.forEach(item => {
@@ -74,6 +131,19 @@
             })
            
             burgerMenu.style.color = '#D95A4D'
+
+        }  else if(scroll < 15 &&  listaProductos.classList.contains('activeMain')) {
+            
+            header.style.backgroundColor = '#FFF9EE'
+            logoFondoClaro.style.display = 'block'
+            logoFondoOscuro.style.display = 'none'
+
+            items.forEach(item => {
+                item.style.color = '#D95A4D'
+            })
+           
+            burgerMenu.style.color = '#D95A4D'
+
         } else {
             header.style.backgroundColor = 'transparent'
             logoFondoClaro.style.display = 'none'

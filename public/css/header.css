@@ -11,13 +11,49 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 2rem;
     height: 70vh;
     z-index: 999998;
 }
 
+#menuResponsive {
+    display: block;
+    transition: all .5s ease ;
+    top: -70%;
+    left: 0;
+    height: fit-content;
+    z-index: 1;
+    padding-top: 8rem;
+}
+
+.menuResponsive::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.menuResponsive:-webkit-scrollbar:vertical {
+    width:10px;
+}
+
+.menuResponsive::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+
+.menuResponsive::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+
+.menuResponsive::-webkit-scrollbar-thumb {
+    background-color: #d5d5d5;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+
+.menuResponsive::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
+
+
 .contenedorHeader {
-    width: 100%;
+    width: 100vw;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,12 +61,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 2rem;
-    z-index: 99;
+    z-index: 999997;
 }
 
-#bloqueMenuHamburguesa {
-    display: none;
-}
 
 .bloqueExterno {
     width: 30%;
@@ -43,20 +76,30 @@
 #burgerMenu {
     font-size: 30px;
     color: white;
-    display: none;
+    display: flex;
 }
 
 .logo {
     width:100px ;
 }
 
-.menu {
-    width: 60%;
+#bloqueMenuHamburguesa {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.menu {
+    width: 100vw;
+    margin-top: 13vh;
+    display: none;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    position:relative;
+    background-color: #D95A4D;
+    position:fixed;
+    background-color: #FFF9EE;
+    margin-left: 0;
 }
 
 .menu a {
@@ -72,6 +115,19 @@
     color: white;
     padding: 0.5rem;
 }
+
+.itemMobile {
+    color: #be5448;
+    padding: 0.5rem 2rem;
+    border-bottom: 1px solid #e4dfd6;
+    height: 4rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 500;
+}
+
 
 .item:hover {
     color: #D95A4D ;
@@ -103,18 +159,23 @@
 
 .listaProductos {
     background-color: transparent;
-    position: absolute;
-    top: 3rem;
-    width: 10rem;
-    color: white;
+    position: relative;
+    top: 0rem;
+    width: 100%;
+    color: #D95A4D;
     display:none;
+    box-shadow: none;
+
 }
 
 .listaProductos li {
-    background-color: #D95A4D;
-    padding: 0.5rem 0.5rem;
+    background-color: #FFF9EE;
+    padding: 1rem 3rem;
     cursor: pointer;
     text-align: left;
+    color: #D95A4D;
+    border-bottom: #d5d5d5 1px solid;
+    font-weight: 400;
 }
 
 .listaProductos li:hover {
@@ -128,4 +189,147 @@
 
 .flecha {
     margin-left: 0.8rem;
+}
+
+@media screen and (min-width: 1280px) {
+    
+    #header {
+        width: 100vw;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        overflow-x: hidden;
+        font-weight: 300;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 2rem;
+        height: 70vh;
+        z-index: 999998;
+    }
+    
+    .contenedorHeader {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 2rem;
+        z-index: 99;
+    }
+    
+    #bloqueMenuHamburguesa {
+        display: none;
+    }
+    
+    .bloqueExterno {
+        width: 30%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #burgerMenu {
+        font-size: 30px;
+        color: white;
+        display: none;
+    }
+    
+    .logo {
+        width:100px ;
+    }
+    
+    .menu {
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        position:relative;
+        margin-top: 0;
+        background-color: transparent;
+    }
+
+    #menuResponsive {
+        display: none;
+    }
+    
+    .menu a {
+        width: 10rem;
+        text-align: center;
+    }
+    
+    .item {
+        margin: 0 15px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+        padding: 0.5rem;
+    }
+    
+    .item:hover {
+        color: #D95A4D ;
+    }
+    
+    .imgFondoClaro {
+        display: none;
+    }
+    
+    .bloqueTitle {
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size:60px;
+        font-weight: 300;
+    }
+    
+    .rel3 {
+        top: 3rem;
+        position: relative;
+        font-size: 25px;
+    }
+    
+    .t2 {
+        top: 3rem;
+        position: relative;
+        font-size: 35px;
+    }
+    
+    .listaProductos {
+        background-color: transparent;
+        position: absolute;
+        top: 3rem;
+        width: 10rem;
+        color: white;
+        display:none;
+        box-shadow: 0 2px 5px rgba(0 0 0 / 0.30);
+    
+    }
+    
+    .listaProductos li {
+        background-color: #D95A4D;
+        padding: 0.5rem 0.5rem;
+        cursor: pointer;
+        text-align: left;
+    }
+    
+    .listaProductos li:hover {
+        background-color: #be5448;
+        
+    }
+    
+    .contenedorProd {
+        position: relative;
+    }
+    
+    .flecha {
+        margin-left: 0.8rem;
+    }
 }
