@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('./partials/head.ejs') %> 
+    <title>Ingreso Administrador</title>
+</head>
+<body>
+    <header id="header">
+        <%- include ('./partials/header.ejs') %>
+        <div class="bloqueTitle t2">
+            <p>Ingreso</p>
+        </div>
+    </header>
+
+    <main class="mainLogin">
+        <section class="contenedorMenu">
+            <form class="contenedorFormularioLogin" action="/loginProcess" method="post">
+                <div class="blockInp">
+                    <label for="">Usuario:</label>
+                    <input type="text" name="user" >
+                    <p class="error"></p>
+                </div>
+                <div class="blockInp">
+                    <label for="">Contraseña:</label>
+                    <input type="text" name="password" >
+                    <p class="error"></p>
+                </div>
+                <section class="recordar-usuario">
+                    <label for="remUser">Recordar usuario</label>
+                    <input type="checkbox" name="remUser" id="remUser">
+                </section>
+
+                <button class="btnIngresar" type="submit">Ingresar</button>
+                
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <%- include ('./partials/footer.ejs') %>
+    </footer>
+    
+</body>
+</html>
+
+<script>
+    const headerTotal = document.getElementById('header')
+    let pathname = window.location.pathname
+    const urlImage  = '/images/bannerInicio.jpg'
+
+    if(pathname == '/loginAdminMagia') {
+        headerTotal.style.backgroundImage = `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0,0,0,0.3)
+        ),
+        url('${urlImage}')`
+
+        headerTotal.style.height = '20vh'
+    }
+
+</script>

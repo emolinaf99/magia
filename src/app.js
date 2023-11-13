@@ -8,6 +8,8 @@ const config = require('./modules/server');
 server.listen(config.port,config.start());
 const {join} = require('path');
 
+const categorias = require("./models/categories.model"); // categorias para el header de 404 not found
+
 //put y delete
 const method = require('method-override'); 
 server.use(method('m')) 
@@ -42,5 +44,9 @@ server.use(require('./routes/products.routes.js'));
 
 //404
 server.use((req,res,next)=> {
-    res.status(404).render("not-found")
+    let categoriasDB = categorias.all()
+
+    res.status(404).render("not-found",{
+        categorias: categoriasDB
+    })
 })

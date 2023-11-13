@@ -11,7 +11,7 @@
     
     <main>
         <section class="sectionFound">
-            <div class="contenedor-img-404"><img  class="img-404" src="/images/Error404.png" alt=""></div>
+            <div class="contenedor-img-404"><img  class="img-404" src="/images/Error.png" alt=""></div>
             <div class="caja-404">
                 <p class="p-404">La página que intentas solicitar no se encuentra en el servidor (Error 404)</p>
                 <div class="back-bottom"><a class="a-404" href="/">Ir al Home</a></div>
@@ -22,3 +22,12 @@
     <%- include ('./partials/footer.ejs') %> 
     
 </body>
+
+<script>
+    let menuHamburguesaNotFound = document.querySelector('#burgerMenu')
+    let logoNotFound = document.querySelector('.logo')
+
+    logoNotFound.src = '/images/LOGO_CIRCULAR_ROJO.png'
+    menuHamburguesaNotFound.style.color = '#D95A4D'
+
+</script>

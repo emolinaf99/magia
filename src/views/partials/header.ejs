@@ -4,8 +4,7 @@
         <i class="fa-solid fa-bars burgerMenuIcon" id="burgerMenu"></i>
     </label>
     <div class="bloqueExterno">
-        <img class="imgFondoOscuro logo" src="/images/LOGO_CIRCULAR_BLANCO.png"  alt="">
-        <img class="imgFondoClaro logo" src="/images/LOGO_CIRCULAR_ROJO.png" alt="">
+        <img class="logo" src="/images/LOGO_CIRCULAR_BLANCO.png"  alt="">
     </div>
     
     <ul class="menu">
@@ -49,7 +48,7 @@
         <a href=""><li class="itemMobile">Nosotros</li></a>
     </ul>
 
-<!-- Script para cuando productos escuche click-->
+<!-- Script eventos -->
 <script>
     const optProductosMobile = document.getElementById('productosOptMobile')
     const listarProductosMobile = document.querySelector('#listaProductosMobile')
@@ -57,18 +56,18 @@
     const listarProductos = document.querySelector('#listaProductosDesktop')
     const menuHamburguesa = document.querySelector('#burgerMenu')
     const listaProductos = document.querySelector('#menuResponsive')
-    const logoRojo = document.querySelector('.imgFondoClaro')
-    const logoBlanco = document.querySelector('.imgFondoOscuro')
-    
+    const logoA = document.querySelector('.logo')
+    const tituloPagina = document.querySelector('.bloqueTitle')
 
+    
+    // Menu hamburguesa escucha click
     menuHamburguesa.addEventListener('click', () => {
 
         if(!listaProductos.classList.contains('activeMain')) {
             listaProductos.classList.add('activeMain')
-            listaProductos.style.top = '-4rem'
+            listaProductos.style.top = '-8.5rem'
             header.style.backgroundColor = '#FFF9EE'
-            logoRojo.style.display = 'flex'
-            logoBlanco.style.display = 'none'
+            logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
             menuHamburguesa.style.color = '#D95A4D'
            
 
@@ -77,14 +76,14 @@
             listaProductos.classList.remove('activeMain')
             listaProductos.style.top = '-70%'
             header.style.backgroundColor = 'transparent'
-            logoRojo.style.display = 'none'
-            logoBlanco.style.display = 'flex'
+            logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
             menuHamburguesa.style.color = 'white'
             
         }
         
     })
 
+    // cuando productos escuche click aparezcan los productos disponibles
     optProductos.addEventListener('click',() => {
         if(listarProductos.style.display == 'block') {
             listarProductos.style.display = 'none'
@@ -93,6 +92,7 @@
         }
     })
 
+    // cuando productos escuche click aparezcan los productos disponibles (Celular, Tablet)
     optProductosMobile.addEventListener('click',() => {
         if(listarProductosMobile.style.display == 'block') {
             listarProductosMobile.style.display = 'none'
@@ -101,59 +101,116 @@
         }
     })
 
-
-
-    
-
-    
 </script>
 
 <!-- Script para  cuando escuche scroll cambie de header -->
 <script>
     let header = document.querySelector('.contenedorHeader')
-    let logoFondoClaro= document.querySelector('.imgFondoClaro')
-    let logoFondoOscuro = document.querySelector('.imgFondoOscuro')
+    let logo = document.querySelector('.logo')
     let items = document.querySelectorAll('.item')
     let burgerMenu = document.querySelector('#burgerMenu')
 
-    window.addEventListener('scroll',() => {
+    fetch(window.location.href)
+        .then(response => {
+            if (response.status === 404) { 
+                //console.log('La página es un error 404');
+                // Aquí puedes realizar alguna acción específica si es un error 404
+
+                header.style.backgroundColor = '#FFF9EE'
+                logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                items.forEach(item => {
+                    item.style.color = '#D95A4D'
+                })
+
+                burgerMenu.style.color = '#D95A4D'
+
+            } else { // Aquí puedes manejar la página disponible
+
+                //console.log('La página está disponible');
+
+                // escucha scroll la pagina
+                window.addEventListener('scroll',() => {
         
-        let scroll = window.scrollY
+                    let scroll = window.scrollY
+                    
 
-        if(scroll > 15) {
+                    if(scroll > 15) {
 
-            header.style.backgroundColor = '#FFF9EE'
-            logoFondoClaro.style.display = 'block'
-            logoFondoOscuro.style.display = 'none'
+                        header.style.backgroundColor = '#FFF9EE'
+                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
 
-            items.forEach(item => {
-                item.style.color = '#D95A4D'
-            })
-           
-            burgerMenu.style.color = '#D95A4D'
+                        items.forEach(item => {
+                            item.style.color = '#D95A4D'
+                        })
 
-        }  else if(scroll < 15 &&  listaProductos.classList.contains('activeMain')) {
-            
-            header.style.backgroundColor = '#FFF9EE'
-            logoFondoClaro.style.display = 'block'
-            logoFondoOscuro.style.display = 'none'
+                        burgerMenu.style.color = '#D95A4D'
 
-            items.forEach(item => {
-                item.style.color = '#D95A4D'
-            })
-           
-            burgerMenu.style.color = '#D95A4D'
+                    } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
+                        header.style.backgroundColor = '#FFF9EE'
+                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
 
-        } else {
-            header.style.backgroundColor = 'transparent'
-            logoFondoClaro.style.display = 'none'
-            logoFondoOscuro.style.display = 'flex'
-            
-            items.forEach(item => {
-                item.style.color = 'white'
-            })
-            burgerMenu.style.color = 'white'
-        }
-    })
+                        items.forEach(item => {
+                            item.style.color = '#D95A4D'
+                        })
+                        burgerMenu.style.color = '#D95A4D'
+                        
+                    } else {
+                        header.style.backgroundColor = 'transparent'
+                        logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
+
+                        items.forEach(item => {
+                            item.style.color = 'white'
+                        })
+                        burgerMenu.style.color = 'white'
+                    }
+
+                    
+                    
+                })
+
+                burgerMenu.addEventListener('click',() => {
+
+                    let scroll = window.scrollY
+                    
+                    if(scroll > 15) {
+
+                        header.style.backgroundColor = '#FFF9EE'
+                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                        items.forEach(item => {
+                            item.style.color = '#D95A4D'
+                        })
+
+                        burgerMenu.style.color = '#D95A4D'
+
+                    } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
+                        header.style.backgroundColor = '#FFF9EE'
+                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                        items.forEach(item => {
+                            item.style.color = '#D95A4D'
+                        })
+                        burgerMenu.style.color = '#D95A4D'
+
+                    } else {
+                        header.style.backgroundColor = 'transparent'
+                        logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
+
+                        items.forEach(item => {
+                            item.style.color = 'white'
+                        })
+                        burgerMenu.style.color = 'white'
+                    }
+                    
+                })
+            }
+        })
+        .catch(error => {
+            console.error('Error al intentar acceder a la página', error);
+            // Manejo de errores, por ejemplo, si la página no se pudo cargar
+        });
+
+    
     
 </script>

@@ -1,0 +1,105 @@
+.sectionFound {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-404 {
+    width: 80vw;
+}
+
+.contenedor-img-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+.p-404 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color:#D95A4D;
+    margin: 0rem 5vw
+}
+
+.a-404, .a-404:hover {
+text-decoration: none;
+color:white;
+}
+
+.back-bottom {
+    border: 1px solid white;
+    display: flex;
+    width: 8rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0rem;
+    background-color: #D95A4D;
+    box-shadow: 0 3px 3px rgba(0 0 0 / 0.15);
+    margin-bottom: 4rem;
+}
+
+.caja-404 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media screen and (min-width:1280px) {
+    .sectionFound {
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .img-404 {
+        width: 40vw;
+    }
+    
+    .contenedor-img-404 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+    }
+    
+    .p-404 {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color:#D95A4D;
+        margin: 0rem 20vw
+    }
+    
+    .a-404, .a-404:hover {
+    text-decoration: none;
+    color:white;
+    }
+    
+    .back-bottom {
+        border: 1px solid white;
+        display: flex;
+        width: 8rem;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 0rem;
+        background-color: #D95A4D;
+        box-shadow: 0 3px 3px rgba(0 0 0 / 0.15);
+        margin-bottom: 4rem;
+    }
+    
+    .caja-404 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+}

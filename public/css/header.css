@@ -22,7 +22,7 @@
     left: 0;
     height: fit-content;
     z-index: 1;
-    padding-top: 8rem;
+    padding-top: 13rem;
 }
 
 .menuResponsive::-webkit-scrollbar {
@@ -117,7 +117,7 @@
 }
 
 .itemMobile {
-    color: #be5448;
+    color: #D95A4D;
     padding: 0.5rem 2rem;
     border-bottom: 1px solid #e4dfd6;
     height: 4rem;
@@ -306,7 +306,7 @@
         background-color: transparent;
         position: absolute;
         top: 3rem;
-        width: 10rem;
+        width: 12rem;
         color: white;
         display:none;
         box-shadow: 0 2px 5px rgba(0 0 0 / 0.30);

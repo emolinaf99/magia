@@ -1,0 +1,105 @@
+.mainLogin {
+    width: 100vw;
+}
+
+.contenedorFormularioLogin {
+    width: 90%;
+    background-color: #D95A4D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 8rem 0rem;
+    padding: 2rem;
+    gap: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0 0 0 / 0.30);
+}
+
+.blockInp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3rem;
+    width: 100%;
+}
+
+.blockInp label {
+    color: white;
+    font-weight: 600;
+}
+
+.blockInp input {
+    width: 100%;
+    padding-left: 0.5rem;
+}
+
+.btnIngresar {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    background-color:#FFF9EE ;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0 0 0 / 0.30);
+    
+}
+
+.recordar-usuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media screen and (min-width:1280px) {
+
+    .mainLogin {
+        width: 100vw;
+    }
+    
+    .contenedorFormularioLogin {
+        width: 50%;
+        background-color: #D95A4D;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 4rem 0rem;
+        padding: 2rem;
+        gap: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0 0 0 / 0.30);
+    }
+    
+    .blockInp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0.3rem;
+        width: 50%;
+    }
+    
+    .blockInp label {
+        color: white;
+        font-weight: 600;
+    }
+    
+    .blockInp input {
+        width: 100%;
+        padding-left: 1rem;
+    }
+    
+    .btnIngresar {
+        width: 200px;
+        padding: 0.5rem;
+        border-radius: 5px;
+        background-color:#FFF9EE ;
+        font-weight: 600;
+        color: #666;
+    }
+}
