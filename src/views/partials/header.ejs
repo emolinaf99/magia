@@ -24,12 +24,17 @@
     </ul>
 
     
-    <div class="bloqueExterno">
-        <p></p>
+    <div class="bloqueExterno beD">
+        <% if (locals.userLogged) { %>
+            <p class="pHeader"><%= locals.userLogged.name %></p>
+            <i class="fa-solid fa-user accountUser"></i>
+        <% } else { %>
+            <p></p>
+        <% } %>
+        
     </div>
 
     
-
 </div>
 
 <ul class="menu" id="menuResponsive">
@@ -58,7 +63,13 @@
     const listaProductos = document.querySelector('#menuResponsive')
     const logoA = document.querySelector('.logo')
     const tituloPagina = document.querySelector('.bloqueTitle')
+    const adminUser = document.querySelector('.accountUser')
+    const nombreUsuario = document.querySelector('.pHeader')
 
+    // Simbolo usuario escucha click (solo para administrador)
+    adminUser.addEventListener('click',() => {
+        window.location.pathname = 'funcionesAdministrador'
+    })
     
     // Menu hamburguesa escucha click
     menuHamburguesa.addEventListener('click', () => {
@@ -69,6 +80,7 @@
             header.style.backgroundColor = '#FFF9EE'
             logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
             menuHamburguesa.style.color = '#D95A4D'
+            
            
 
         } else {
@@ -103,7 +115,7 @@
 
 </script>
 
-<!-- Script para  cuando escuche scroll cambie de header -->
+<!-- Script para  cuando escuche scroll, escuche click el menu hamburguesa(mobile) cambie de header -->
 <script>
     let header = document.querySelector('.contenedorHeader')
     let logo = document.querySelector('.logo')
@@ -111,105 +123,139 @@
     let burgerMenu = document.querySelector('#burgerMenu')
 
     fetch(window.location.href)
-        .then(response => {
-            if (response.status === 404) { 
-                //console.log('La página es un error 404');
-                // Aquí puedes realizar alguna acción específica si es un error 404
+    .then(response => {
+        if (response.status === 404) { 
+            //console.log('La página es un error 404');
+            // Aquí puedes realizar alguna acción específica si es un error 404
 
-                header.style.backgroundColor = '#FFF9EE'
-                logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+            header.style.backgroundColor = '#FFF9EE'
+            logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
 
-                items.forEach(item => {
-                    item.style.color = '#D95A4D'
-                })
-
-                burgerMenu.style.color = '#D95A4D'
-
-            } else { // Aquí puedes manejar la página disponible
-
-                //console.log('La página está disponible');
-
-                // escucha scroll la pagina
-                window.addEventListener('scroll',() => {
-        
-                    let scroll = window.scrollY
-                    
-
-                    if(scroll > 15) {
-
-                        header.style.backgroundColor = '#FFF9EE'
-                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
-
-                        items.forEach(item => {
-                            item.style.color = '#D95A4D'
-                        })
-
-                        burgerMenu.style.color = '#D95A4D'
-
-                    } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
-                        header.style.backgroundColor = '#FFF9EE'
-                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
-
-                        items.forEach(item => {
-                            item.style.color = '#D95A4D'
-                        })
-                        burgerMenu.style.color = '#D95A4D'
-                        
-                    } else {
-                        header.style.backgroundColor = 'transparent'
-                        logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
-
-                        items.forEach(item => {
-                            item.style.color = 'white'
-                        })
-                        burgerMenu.style.color = 'white'
-                    }
-
-                    
-                    
-                })
-
-                burgerMenu.addEventListener('click',() => {
-
-                    let scroll = window.scrollY
-                    
-                    if(scroll > 15) {
-
-                        header.style.backgroundColor = '#FFF9EE'
-                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
-
-                        items.forEach(item => {
-                            item.style.color = '#D95A4D'
-                        })
-
-                        burgerMenu.style.color = '#D95A4D'
-
-                    } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
-                        header.style.backgroundColor = '#FFF9EE'
-                        logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
-
-                        items.forEach(item => {
-                            item.style.color = '#D95A4D'
-                        })
-                        burgerMenu.style.color = '#D95A4D'
-
-                    } else {
-                        header.style.backgroundColor = 'transparent'
-                        logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
-
-                        items.forEach(item => {
-                            item.style.color = 'white'
-                        })
-                        burgerMenu.style.color = 'white'
-                    }
-                    
-                })
+            if(adminUser) {
+                adminUser.style.color = '#D95A4D'
+                nombreUsuario.style.color = '#D95A4D'
             }
-        })
-        .catch(error => {
-            console.error('Error al intentar acceder a la página', error);
-            // Manejo de errores, por ejemplo, si la página no se pudo cargar
-        });
+            
+
+            items.forEach(item => {
+                item.style.color = '#D95A4D'
+            })
+
+            burgerMenu.style.color = '#D95A4D'
+
+        } else { // Aquí puedes manejar la página disponible
+
+            //console.log('La página está disponible');
+
+            // escucha scroll la pagina
+            window.addEventListener('scroll',() => {
+    
+                let scroll = window.scrollY
+                
+
+                if(scroll > 15) {
+
+                    header.style.backgroundColor = '#FFF9EE'
+                    logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                    if(adminUser){
+                        adminUser.style.color = '#D95A4D'
+                        nombreUsuario.style.color = '#D95A4D'
+                    }
+
+                    items.forEach(item => {
+                        item.style.color = '#D95A4D'
+                    })
+
+                    burgerMenu.style.color = '#D95A4D'
+
+                } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
+                    header.style.backgroundColor = '#FFF9EE'
+                    logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                    items.forEach(item => {
+                        item.style.color = '#D95A4D'
+                    })
+                    burgerMenu.style.color = '#D95A4D'
+
+                    if(adminUser){
+                        adminUser.style.color = '#D95A4D'
+                        nombreUsuario.style.color = '#D95A4D'
+                    }
+
+                } else {
+                    header.style.backgroundColor = 'transparent'
+                    logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
+
+                    items.forEach(item => {
+                        item.style.color = 'white'
+                    })
+                    burgerMenu.style.color = 'white'
+
+                    if(adminUser){
+                        adminUser.style.color = 'white'
+                        nombreUsuario.style.color = 'white'
+                    }
+                }
+
+                
+                
+            })
+
+            // escucha click el menu hamburguesa
+            burgerMenu.addEventListener('click',() => {
+
+                let scroll = window.scrollY
+                
+                if(scroll > 15) {
+
+                    header.style.backgroundColor = '#FFF9EE'
+                    logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                    items.forEach(item => {
+                        item.style.color = '#D95A4D'
+                    })
+
+                    burgerMenu.style.color = '#D95A4D'
+
+                    if(adminUser){
+                        adminUser.style.color = '#D95A4D'
+                    }
+
+                } else if (scroll < 15 && listaProductos.classList.contains('activeMain')) {
+                    header.style.backgroundColor = '#FFF9EE'
+                    logo.src = '/images/LOGO_CIRCULAR_ROJO.png'
+
+                    items.forEach(item => {
+                        item.style.color = '#D95A4D'
+                    })
+                    burgerMenu.style.color = '#D95A4D'
+
+                    if(adminUser){
+                        adminUser.style.color = '#D95A4D'
+                    }
+
+                } else {
+                    header.style.backgroundColor = 'transparent'
+                    logo.src = '/images/LOGO_CIRCULAR_BLANCO.png'
+
+                    items.forEach(item => {
+                        item.style.color = 'white'
+                    })
+                    burgerMenu.style.color = 'white'
+
+                    if(adminUser){
+                        adminUser.style.color = 'white'
+                    }
+                }
+                
+            })
+        }
+    })
+    .catch(error => {
+        console.error('Error al intentar acceder a la página', error);
+        // Manejo de errores, por ejemplo, si la página no se pudo cargar
+    });
 
     
     

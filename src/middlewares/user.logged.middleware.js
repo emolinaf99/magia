@@ -1,46 +1,25 @@
-const db = require("../database/models")
+const user = require("../models/user.model")
 
+function userLoggedMiddleware (req,res,next) {
+    
+    res.locals.isLogged = false;
 
-let userLoggedMiddleware = (req,res,next) => {
-    let user = null;
+    let emailInCookie = req.cookies.adminUser;
+    let userFromCookie = user.findByField("user", emailInCookie);
 
-    if (req.cookies.userCookie && req.session.userLogged == undefined){
-        // Se buscan todos los usuarios
-        db.Usuario.findOne({
-            where: {
-                Usuario: req.cookies.userCookie
-            },
-            // incluya la asociación entre usuario y persona para obtener los datos de persona
-            include: [{association:'PersonaUsuario'}]
-                
-        }).then((userFound) => {
-
-            //console.log(userFound);
-            
-            req.session.userLogged = userFound; // Lo asigno a la sesión
-            
-            // El resto sigue como estaba!
-            if(req.session && req.session.userLogged) {
-                user = req.session.userLogged
-            }
-
-            res.locals.userLogged = user;
-            return next();
-
-        }).catch((err) => {
-            console.log(err);
-        });
-        
-    } else {
-        
-        res.locals.userLogged = req.session.userLogged
-        
-        return next()
+    if(userFromCookie && req.session.userLogged == undefined ) {
+        //console.log(userFromCookie);
+        req.session.userLogged = userFromCookie;
     }
 
+    if(req.session.userLogged) {
+        res.locals.isLogged = true;
+        res.locals.userLogged = req.session.userLogged;
+    }
     
-};
 
-module.exports = userLoggedMiddleware
+    next();
+}
 
+module.exports = userLoggedMiddleware;
     

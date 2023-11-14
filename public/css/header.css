@@ -11,7 +11,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70vh;
     z-index: 999998;
 }
 
@@ -71,6 +70,21 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+}
+
+.bloqueExterno p {
+    color: white;
+}
+
+.beD {
+    justify-content: flex-end;
+}
+
+.accountUser {
+    font-size: 30px;
+    color: white;
 }
 
 #burgerMenu {
@@ -145,6 +159,7 @@
     font-weight: 300;
 }
 
+
 .rel3 {
     top: 3rem;
     position: relative;
@@ -207,7 +222,6 @@
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 2rem;
-        height: 70vh;
         z-index: 999998;
     }
     

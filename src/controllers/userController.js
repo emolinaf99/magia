@@ -14,11 +14,22 @@ require('dotenv').config() // carga variables de entorno (ocultar contraseñas, 
 const controller = {
     
     loginProcess: async (req, res) => {
-        console.log(req.body);
-        
+        //console.log(req.body);
+
         let userToLogin = await User.findByField('user', req.body.user);
         let categoriasDB =  await categorias.all()
-
+        
+        const result = validationResult(req);
+       
+        if (!result.isEmpty()) {
+            return res.render('login', {
+                style: 'login',
+                errors: result.mapped(),
+                data: req.body,
+                categorias: categoriasDB
+            })
+        }
+        
         if (userToLogin) {
             
             let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
@@ -30,25 +41,28 @@ const controller = {
                 if (req.body.remUser) {
                     res.cookie("adminUser", req.body.user, /*{ maxAge: (1000 * 60) * 120 }*/)
                 }
-                console.log('primer return');
+                //console.log('primer return');
                 return res.redirect("/")
             }
-            console.log('segundo return');
+            //console.log('segundo return');
             return res.render('login', {
                 
-                categorias: categoriasDB
+                categorias: categoriasDB,
+                
             });
         }
-        console.log('tercer return');
+        //console.log('tercer return');
         return res.render("login", {
-            errors: {
-                user: {
-                    msg: 'Usuario incorrecto'
-                }
-            },
+            
             categorias: categoriasDB
         })
     },
+
+    funcionesAdministradorVista: async (req,res) => {
+        return res.render('functionsAdmin',{
+            categorias: await categorias.all()
+        })
+    }
 }
 
 module.exports = controller

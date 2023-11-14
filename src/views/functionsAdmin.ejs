@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include ('./partials/head.ejs') %> 
+        <title>Funciones de Administrador</title>
+    </head>
+     
+    <body>
+        <header id="header">
+            <%- include ('./partials/header.ejs') %>
+            <div class="bloqueTitle t2">
+                <p>Funciones de Administrador</p>
+            </div>
+        </header>
+         
+        <main class="mainIndex">
+            
+            <section class="contenedorMenu">
+                <!-- Formulario crear nuevo producto -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm">Crear Nuevo Producto</h3>
+                    <form class="formNew " action="/createNewProduct" method="post">
+                        <div class="formBlockInput">
+                            <label for="">Nombre del Producto:</label>
+                            <input class="inputForm" type="text" name="nombre" autocomplete="off">
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Descripción:</label>
+                            <textarea class="inputForm" name="descripcion"  cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Tamaño:</label>
+                            <input class="inputForm" type="text" name="tamano" autocomplete="off">
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Categoria:</label>
+                            <select class="selectForm" name="categoria">
+                                <% if (categorias.length > 0) { %>
+                                 <% categorias.forEach(categoria => { %>
+                                    <option value="<%= categoria.id %>"><%= categoria.name %></option>
+                                 <% }) %>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Precio:</label>
+                            <input class="inputForm" type="text" name="precio" >
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Imagen Principal:</label>
+                            <input class="inputForm" type="file" name="imagenPrincipal" >
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Imagen Dos:</label>
+                            <input class="inputForm" type="file" name="imagenDos" >
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Imagen Tres:</label>
+                            <input class="inputForm" type="file" name="imagenTres" >
+                        </div>
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
+                <!-- Formulario crear nueva categoria -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm">Crear Nueva Categoria</h3>
+                    <form class="formNew" action="/createNewCategory" method="post">
+                        <div class="formBlockInput">
+                            <label for="">Nombre de la Categoria:</label>
+                            <input class="inputForm" type="text" name="nombre" autocomplete="off" >
+                        </div>
+                        <div class="formBlockInput">
+                            <label for="">Imagen Banner:</label>
+                            <input class="inputForm" type="file" name="imagenBanner">
+                        </div>
+                        
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
+                
+                
+            </section>
+
+            
+
+             
+        </main>
+    </body>
+
+    <footer>
+        <%- include ('./partials/footer.ejs') %>
+    </footer>
+
+     
+</html>
+
+<script>
+    let tituloDeFormulario = document.querySelectorAll('.titleForm')
+    
+
+    tituloDeFormulario.forEach(titulo => {
+        titulo.addEventListener('click',()=> {
+
+            let contenidoFormulario = titulo.parentNode.childNodes[3]
+
+            if(!titulo.classList.contains('noneForm')) {
+                titulo.classList.add('noneForm')
+                contenidoFormulario.style.display = 'none'
+            } else {
+                titulo.classList.remove('noneForm')
+                contenidoFormulario.style.display = 'flex'
+            }
+
+        })
+    })
+</script>
+
+<script>
+    const headerTotal = document.getElementById('header')
+    let pathname = window.location.pathname
+    const urlImage  = '/images/bannerInicio.jpg'
+
+    if(pathname == '/funcionesAdministrador') {
+        headerTotal.style.backgroundImage = `linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0,0,0,0.3)
+        ),
+        url('${urlImage}')`
+
+        headerTotal.style.height = '25vh'
+    }
+
+</script>

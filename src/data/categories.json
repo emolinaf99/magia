@@ -1,15 +1,18 @@
 [
     {
         "id": 1,
-        "name": "Velas"
+        "name": "Velas",
+        "imgBanner": ""
     },
     {
         "id": 2,
-        "name": "Ambientadores"
+        "name": "Ambientadores",
+        "imgBanner": ""
     },
     {
         "id": 3,
-        "name": "Difusores"
+        "name": "Difusores",
+        "imgBanner": ""
     }
     
 

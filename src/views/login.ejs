@@ -17,13 +17,23 @@
             <form class="contenedorFormularioLogin" action="/loginProcess" method="post">
                 <div class="blockInp">
                     <label for="">Usuario:</label>
-                    <input type="text" name="user" >
-                    <p class="error"></p>
+                    <input type="text" name="user" id="userInput" value="<%= locals.errors && !locals.errors.user && locals.data ? locals.data.user : null %>">
+                    <p class="error2 errUser"></p>
+                    <% if (locals.errors && locals.errors.user) { %>
+                        
+                        <p class="error2"><%= locals.errors.user.msg %></p>
+                        
+                    <% } %>
                 </div>
                 <div class="blockInp">
                     <label for="">Contraseña:</label>
-                    <input type="text" name="password" >
-                    <p class="error"></p>
+                    <input type="text" name="password" id="passwordInput">
+                    <p class="error2 errPassword"></p>
+                    <% if (locals.errors && locals.errors.password) { %>
+                        
+                        <p class="error2"><%= locals.errors.password.msg %></p>
+                        
+                    <% } %>
                 </div>
                 <section class="recordar-usuario">
                     <label for="remUser">Recordar usuario</label>
@@ -43,6 +53,7 @@
 </body>
 </html>
 
+<!-- Script para banner de header -->
 <script>
     const headerTotal = document.getElementById('header')
     let pathname = window.location.pathname
@@ -57,5 +68,20 @@
 
         headerTotal.style.height = '20vh'
     }
+
+</script>
+
+<!-- Script que llama la funcion para validar login -->
+<script src="/js/validacionFrontLogin.js"></script>
+
+<script>
+
+    const inputUser = document.querySelector('#userInput')
+    const inputPassword = document.querySelector('#passwordInput')
+    const btnIngresar = document.querySelector('.btnIngresar')
+    const errorUser = document.querySelector('.errUser')
+    const errorPassword = document.querySelector('.errPassword')
+
+    validacionFrontLogin (inputUser, errorUser, inputPassword, errorPassword, btnIngresar)
 
 </script>

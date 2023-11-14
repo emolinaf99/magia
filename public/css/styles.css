@@ -6,6 +6,7 @@
 @import url(detalle.css);
 @import url(login.css);
 @import url(notFound.css);
+@import url(funcionesAdministrador.css);
 
 /* Colores de Marca */
 
@@ -56,6 +57,14 @@ body{
     font-size: 13px;
 }
 
+.error2 {
+    color: #FEC91B;
+    padding: 0 8px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
 a {
     white-space: wrap;
     text-decoration: none;
@@ -81,7 +90,6 @@ input[type="checkbox"] {
 input {
     font-size: 16px;
     height: 2rem;
-    border-radius: 5px;
 }
 
 select {

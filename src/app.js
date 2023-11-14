@@ -3,7 +3,7 @@ const server = express();
 const session = require("express-session");
 const cookies = require("cookie-parser");
 const config = require('./modules/server');
-//const userLoggedMiddleware = require("./middlewares/user.logged.middleware");
+const userLoggedMiddleware = require("./middlewares/user.logged.middleware");
 
 server.listen(config.port,config.start());
 const {join} = require('path');
@@ -28,7 +28,7 @@ server.use(session({
     saveUninitialized:false
 }));
 
-//server.use(userLoggedMiddleware);
+server.use(userLoggedMiddleware);
 
 //static
 const statics = require('./modules/static');

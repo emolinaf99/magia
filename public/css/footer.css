@@ -42,6 +42,14 @@ h4 {
     margin-top: 5vw;
 }
 
+.formulario form div {
+    width: 100%;
+}
+
+.formulario form div input {
+    width: 100%;
+}
+
 .b {
     border-bottom: #D95A4D 1px solid;
     padding: 0rem 1rem;
@@ -58,7 +66,7 @@ h4 {
 .formulario label {
     display: block;
     color:#D95A4D;
-    font-weight: 400;
+    font-weight: 500;
     text-align: left;
     padding-bottom: 0.2rem;
     font-size: 18px;
@@ -169,7 +177,15 @@ h4 {
 
     .formulario {
         margin-bottom: 3vw;
-        padding:0vw 25vw;
+        padding:0vw 10vw;
+    }
+
+    .formulario form div {
+        width: 100%;
+    }
+
+    .formulario form div input {
+        width: 100%;
     }
 
     .b {
@@ -180,6 +196,7 @@ h4 {
     .formulario label {
         font-size: 16px;
         padding-bottom: 0.2rem;
+        font-weight: 500;
     }
 
     .enviar-block {
@@ -205,7 +222,7 @@ h4 {
 @media screen and (min-width:1280px) {
     
     .info-distribuidor {
-        padding:0vw 20vw;
+        padding:0vw 10%;
         font-size: 20px;
         gap: 1rem;
     }
@@ -220,7 +237,15 @@ h4 {
 
     .formulario {
         margin-bottom: 5vw;
-        padding:0vw 35vw;
+        padding:0vw 20%;
+    }
+
+    .formulario form div {
+        width: 100%;
+    }
+
+    .formulario form div input {
+        width: 100%;
     }
 
     .b {
@@ -231,6 +256,7 @@ h4 {
     .formulario label {
         font-size: 16px;
         padding-bottom: 0.3rem;
+        font-weight: 500;
     }
 
     .enviar-block {
