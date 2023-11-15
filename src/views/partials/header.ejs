@@ -67,9 +67,12 @@
     const nombreUsuario = document.querySelector('.pHeader')
 
     // Simbolo usuario escucha click (solo para administrador)
-    adminUser.addEventListener('click',() => {
-        window.location.pathname = 'funcionesAdministrador'
-    })
+    if(adminUser) {
+        adminUser.addEventListener('click',() => {
+            window.location.pathname = 'funcionesAdministrador'
+        })
+    }
+    
     
     // Menu hamburguesa escucha click
     menuHamburguesa.addEventListener('click', () => {
