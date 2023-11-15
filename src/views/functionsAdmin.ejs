@@ -18,7 +18,7 @@
             <section class="contenedorMenu">
                 <!-- Formulario crear nuevo producto -->
                 <div class="contFormNew">
-                    <h3 class="titleForm noneForm">Crear Nuevo Producto</h3>
+                    <h3 class="titleForm noneForm dinamicTitle">Crear Nuevo Producto</h3>
                     <form class="formNew " action="/createNewProduct" method="post">
                         <div class="formBlockInput">
                             <label for="">Nombre del Producto:</label>
@@ -65,7 +65,7 @@
 
                 <!-- Formulario crear nueva categoria -->
                 <div class="contFormNew">
-                    <h3 class="titleForm noneForm">Crear Nueva Categoria</h3>
+                    <h3 class="titleForm noneForm dinamicTitle">Crear Nueva Categoria</h3>
                     <form class="formNew" action="/createNewCategory" method="post">
                         <div class="formBlockInput">
                             <label for="">Nombre de la Categoria:</label>
@@ -76,6 +76,16 @@
                             <input class="inputForm" type="file" name="imagenBanner">
                         </div>
                         
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
+                <!-- Formulario Cerrar Sesión -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm" id="cerrarSesion">Cerrar Sesion</h3>
+                    <form hidden class="formNew" action="/deleteSesion?m=DELETE" method="post">
+                        <input hidden type="text" name="" id="" value="<%= locals.userLogged.id %>">
                         <button class="enviar" type="submit">Enviar</button>
                         
                     </form>
@@ -99,8 +109,12 @@
 </html>
 
 <script>
-    let tituloDeFormulario = document.querySelectorAll('.titleForm')
-    
+    let tituloDeFormulario = document.querySelectorAll('.dinamicTitle')
+    let btnCerrarSesion = document.getElementById('cerrarSesion')
+
+    btnCerrarSesion.addEventListener('click',(e) => {
+        
+    })
 
     tituloDeFormulario.forEach(titulo => {
         titulo.addEventListener('click',()=> {

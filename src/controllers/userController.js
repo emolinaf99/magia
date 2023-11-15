@@ -62,7 +62,13 @@ const controller = {
         return res.render('functionsAdmin',{
             categorias: await categorias.all()
         })
-    }
+    },
+
+    logout: (req, res) => {
+        res.clearCookie("adminUser");
+        req.session.destroy();
+        return res.redirect("/");
+    },
 }
 
 module.exports = controller

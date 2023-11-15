@@ -12,6 +12,7 @@ const validationsLogin = require('../validations/login')
 router.get("/", controller.vistaPaginaPrincipal);
 router.get("/loginAdminMagia",guestMiddleware, controller.loginAdmin);
 router.get("/funcionesAdministrador",authMiddleware, userController.funcionesAdministradorVista);
+router.get("/deleteSesion",authMiddleware, userController.logout);
 
 router.post("/formularioContacto", controller.formularioGoogleSheet);
 router.post("/loginProcess", validationsLogin, userController.loginProcess);
