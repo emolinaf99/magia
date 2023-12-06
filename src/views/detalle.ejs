@@ -21,12 +21,12 @@
                     <div class="imagesArea">
                         <div class="blockImages">
                             <div class="imgPrincipal">
-                                <img src="/images/rojoCirculo.jpg" alt="" id="imagenPrincipal">
+                                <img src="<%= producto.imagenPrincipal %>" alt="" id="imagenPrincipal">
                             </div>
                             <div class="otrasFotos">
-                                <img src="/images/rojoCirculo.jpg" alt="" id="imagenPrincipalPequeña">
-                                <img src="/images/rojoPeq.jpg" alt="" id="segundaImagen">
-                                <img src="/images/amarilloPeq.jpg" alt="" id="terceraImagen">
+                                <img src="<%= producto.imagenPrincipal %>" alt="" id="imagenPrincipalPequeña">
+                                <img src="<%= producto.imagenDos %>" alt="" id="segundaImagen">
+                                <img src="<%= producto.imagenTres %>" alt="" id="terceraImagen">
                             </div>
                         </div>
                         
@@ -53,14 +53,81 @@
                                 </ul>
                             </div>  
 
-                            <div class="descriptionProduct">
-                                <p>ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi a</p>
-                            </div>
-                            
                         </div>
-
+                        
                     </div>
+                    
                 </section>
+
+                <% if (locals.userLogged) { %>
+                    <div class="contenedorEdit" id="editProductForm">
+                        <div class="titleMsgTemporal">
+                            <p>Formulario Editar Producto</p>
+                            <p class="x">X</p>
+                        </div>
+                        <div class="contenedorFormEditProd">
+                            <form class="formNew " action="/editProduct?m=PUT" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="idProducto" value="<%= producto.id %>">
+
+                                <div class="formBlockInput">
+                                    <label for="">Nombre del Producto:</label>
+                                    <input class="inputForm" type="text" name="name" value="<%= producto.name %>">
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Descripción:</label>
+                                    <textarea class="inputForm" name="descripcion"  cols="30" rows="3"><%= producto.descripcion %></textarea>
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Tamaño:</label>
+                                    <input class="inputForm" type="text" name="presentacion" value="<%= producto.presentacion %>">
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Categoria:</label>
+                                    <select class="selectForm" name="categoria">
+                                        <% if (categorias.length > 0) { %>
+                                         <% categorias.forEach(categoria => { %>
+                                            <% if (categoria.id == producto.categoria) { %>
+                                                <option selected value="<%= categoria.id %>"><%= categoria.name %></option>
+                                            <% } else { %>
+                                                <option value="<%= categoria.id %>"><%= categoria.name %></option>
+                                            <% } %>
+                                            
+                                         <% }) %>
+                                        <% } %>
+                                    </select>
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Precio:</label>
+                                    <input class="inputForm" type="text" name="precio" value="<%= producto.precio %>">
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Imagen Principal:</label>
+                                    <input class="inputForm" type="file" name="imagenPrincipal" >
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Imagen Dos:</label>
+                                    <input class="inputForm" type="file" name="imagenDos" >
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Imagen Tres:</label>
+                                    <input class="inputForm" type="file" name="imagenTres" >
+                                </div>
+                                <button class="enviar" type="submit">Enviar</button>
+                                
+                            </form>
+                        </div>
+                        
+                    </div>
+
+                    <div class="botonesArea" >
+                        <a class="btn80 BGorange" href="#editProductForm" id="botonEditar">Editar</a>
+    
+                        <button class="btn80 BGred" type="submit">Eliminar</button>
+                    </div>
+                <% } %>
+
+                
+                
             </section>
 
              
@@ -74,11 +141,14 @@
      
 </html>
 
+<!-- script para cambiar foto cuando se selecciona y mostrar la seleccionada -->
 <script>
     const fotoPrincipalGrande = document.getElementById('imagenPrincipal')
     const fotoPrincipalPequeña = document.getElementById('imagenPrincipalPequeña')
     const segundaFoto = document.getElementById('segundaImagen')
     const terceraFoto = document.getElementById('terceraImagen')
+
+    fotoPrincipalPequeña.style.border = '2px solid black'
 
 
     function resaltarFoto(foto, array) { // funcion para resaltar algo de los demas, en este caso fotos
@@ -116,6 +186,33 @@
 
     cambiarFotosDetalleProducto(fotoPrincipalGrande,fotoPrincipalPequeña, segundaFoto, terceraFoto  ) 
 
+</script>
+
+<!-- script para mostrar y ocultar formulario editar producto -->
+<script>
+    let btnEditar = document.querySelector('#botonEditar')
+    let formularioEditarContenedor = document.querySelector('.contenedorEdit')
+    let cover_ctn = document.getElementById("cover-ctn");
+    let equis = document.querySelector('.x')
+    let formularioEditar = document.querySelector('.formNew')
+
+    btnEditar.addEventListener('click',() => { // boton editar escucha click
+        formularioEditarContenedor.style.display = 'flex'
+        cover_ctn.style.display = 'flex'
+        formularioEditar.style.display = 'flex'
+    })
+
+    cover_ctn.addEventListener('click',() => { // fondo oscuro escucha click
+        cover_ctn.style.display = 'none'
+        formularioEditarContenedor.style.display = 'none'
+        formularioEditar.style.display = 'none'
+    })
+
+    equis.addEventListener('click',() => { // equis de formulario editar producto escucha click
+        cover_ctn.style.display = 'none'
+        formularioEditarContenedor.style.display = 'none'
+        formularioEditar.style.display = 'none'
+    })
 </script>
 
 <!-- Script para poner la imagen del header al cargar la pagina-->

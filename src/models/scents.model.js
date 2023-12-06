@@ -31,8 +31,7 @@ const Scents = {
         let allScentses = Scents.all();
         let newScent = {
             id: Scents.generateId(),
-            game: ProductData.game,
-            img: ProductData.img
+            name: ProductData.nombreFragancia
         }
         allScentses.push(newScent);
         fs.writeFileSync(Scents.FileName, JSON.stringify(allScentses, null, ' '))

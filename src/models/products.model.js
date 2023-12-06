@@ -31,8 +31,15 @@ const Product = {
         let allProducts = Product.all();
         let newProduct = {
             id: Product.generateId(),
-            game: ProductData.game,
-            img: ProductData.img
+            name: ProductData.name,
+            descripcion: ProductData.descripcion,
+            presentacion: ProductData.presentacion,
+            precio: ProductData.precio,
+            categoria: ProductData.categoria,
+            imagenPrincipal: ProductData.imagenPrincipal,
+            imagenDos: ProductData.imagenDos,
+            imagenTres: ProductData.imagenTres
+            
         }
         allProducts.push(newProduct);
         fs.writeFileSync(Product.FileName, JSON.stringify(allProducts, null, ' '))

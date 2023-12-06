@@ -4,6 +4,7 @@
     justify-content: space-around;
     align-items: center;
     width: 100vw;
+
 }
 
 .imagesArea {
@@ -12,6 +13,20 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+} 
+
+.contenedorFormEditProd {
+    width: 90%;
+    padding: 2rem 0;
+}
+
+.botonesArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .blockImages {
@@ -101,13 +116,56 @@
     margin: 2rem 1rem;
 }
 
+.contenedorEdit {
+    width: 90%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    background-color:white;
+    color: white;
+    top: 25%;
+    right: 0;
+    left: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    z-index: 99999999;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, .16);
+    margin: auto;
+}
+
+.titleMsgTemporal {
+    display: flex;
+    flex-direction: row;
+    background-color: #D95A4D;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 100%;
+    gap: 0.5rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-weight: 400;
+}
+
+.x {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 @media screen and (min-width:768px) {
     .detalleContenedor {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        width: 100%;
+        width: 90%;
     }
     
     .imagesArea {
@@ -198,6 +256,45 @@
     
     .descriptionProduct ul li {
         list-style-type: disc;
+    }
+
+    .contenedorEdit {
+        width: 80%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: absolute;
+        background-color: white;
+        color: white;
+        top: 7rem;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        z-index: 99999999;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, .16);
+    }
+
+    .titleMsgTemporal {
+        display: flex;
+        flex-direction: row;
+        background-color: #D95A4D;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        width: 100%;
+        gap: 0.5rem;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    
+    .x {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 18px;
+        cursor: pointer;
     }
 }
 
@@ -298,6 +395,46 @@
     
     .descriptionProduct ul li {
         list-style-type: disc;
+    }
+
+    .contenedorEdit {
+        width: 50%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: absolute;
+        background-color:white;
+        color: white;
+        top: 7rem;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        z-index: 99999999;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, .16);
+    }
+
+    .titleMsgTemporal {
+        display: flex;
+        flex-direction: row;
+        background-color: #D95A4D;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        width: 100%;
+        gap: 0.5rem;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    
+    .x {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 18px;
+        cursor: pointer;
+        font-weight: 500;
     }
     
     

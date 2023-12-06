@@ -94,7 +94,8 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    margin: 3rem 0rem;
+    margin-bottom: 3rem;
+    margin-top: 0rem;
 }
 
 .contenedor2Vacios {

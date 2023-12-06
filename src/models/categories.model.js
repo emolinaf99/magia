@@ -31,8 +31,8 @@ const Category = {
         let allCategories = Category.all();
         let newCategory = {
             id: Category.generateId(),
-            game: ProductData.game,
-            img: ProductData.img
+            name: ProductData.categoryName,
+            imgBanner: ProductData.imgBanner
         }
         allCategories.push(newCategory);
         fs.writeFileSync(Category.FileName, JSON.stringify(allCategories, null, ' '))

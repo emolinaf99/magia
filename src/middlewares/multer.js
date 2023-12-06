@@ -4,7 +4,7 @@ const {existsSync,mkdirSync} = require('fs');
 const multer = require('multer');
 
 const destination = function(req,file,cb){
-    let folder = resolve(__dirname,'..','..','public','media');
+    let folder = resolve(__dirname,'..','..','public','images');
     if(!existsSync(folder)){
         mkdirSync(folder)
     }

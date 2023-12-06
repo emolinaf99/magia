@@ -11,18 +11,50 @@
             <div class="bloqueTitle t2">
                 <p>Funciones de Administrador</p>
             </div>
+            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.imagenBanner %>">
         </header>
          
         <main class="mainIndex">
             
             <section class="contenedorMenu">
+
+                <!-- Formulario cambiar banner -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm dinamicTitle">Editar Banner Principal</h3>
+                    <form class="formNew" action="/bannerChange?m=PUT" method="post" enctype="multipart/form-data">
+
+                        <div class="formBlockInput">
+                            <label for="">Imagen Banner:</label>
+                            <input class="inputForm" type="file" name="imagenBanner">
+                        </div>
+                        
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
+                <!-- Formulario cambiar texto banner -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm dinamicTitle">Editar Texto Banner</h3>
+                    <form class="formNew" action="/bannerTextChange?m=PUT" method="post">
+                        
+                        <div class="formBlockInput">
+                            <label for="">Ingrese Nuevo Texto:</label>
+                            <textarea class="inputForm" name="textoAnimacion" id="" cols="30" rows="3"></textarea>
+                        </div>
+                        
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
                 <!-- Formulario crear nuevo producto -->
                 <div class="contFormNew">
                     <h3 class="titleForm noneForm dinamicTitle">Crear Nuevo Producto</h3>
-                    <form class="formNew " action="/createNewProduct" method="post">
+                    <form class="formNew " action="/createProduct" method="post" enctype="multipart/form-data">
                         <div class="formBlockInput">
                             <label for="">Nombre del Producto:</label>
-                            <input class="inputForm" type="text" name="nombre" autocomplete="off">
+                            <input class="inputForm" type="text" name="name" autocomplete="off">
                         </div>
                         <div class="formBlockInput">
                             <label for="">Descripción:</label>
@@ -30,7 +62,7 @@
                         </div>
                         <div class="formBlockInput">
                             <label for="">Tamaño:</label>
-                            <input class="inputForm" type="text" name="tamano" autocomplete="off">
+                            <input class="inputForm" type="text" name="presentacion" autocomplete="off">
                         </div>
                         <div class="formBlockInput">
                             <label for="">Categoria:</label>
@@ -66,14 +98,29 @@
                 <!-- Formulario crear nueva categoria -->
                 <div class="contFormNew">
                     <h3 class="titleForm noneForm dinamicTitle">Crear Nueva Categoria</h3>
-                    <form class="formNew" action="/createNewCategory" method="post">
+                    <form class="formNew" action="/createCategory" method="post" enctype="multipart/form-data">
                         <div class="formBlockInput">
                             <label for="">Nombre de la Categoria:</label>
-                            <input class="inputForm" type="text" name="nombre" autocomplete="off" >
+                            <input class="inputForm" type="text" name="categoryName" autocomplete="off" >
                         </div>
                         <div class="formBlockInput">
-                            <label for="">Imagen Banner:</label>
-                            <input class="inputForm" type="file" name="imagenBanner">
+                            <label for="">Imagen Categoria:</label>
+                            <input class="inputForm" type="file" name="imgBannerCategory">
+                        </div>
+                        
+                        <button class="enviar" type="submit">Enviar</button>
+                        
+                    </form>
+                </div>
+
+                <!-- Formulario crear nueva fragancia -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm dinamicTitle">Crear Nueva Fragancia</h3>
+                    <form class="formNew" action="/createScent" method="post">
+                        
+                        <div class="formBlockInput">
+                            <label for="">Nombre:</label>
+                            <input class="inputForm" type="text" name="nombreFragancia">
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -84,7 +131,7 @@
                 <!-- Formulario Cerrar Sesión -->
                 <div class="contFormNew">
                     <h3 class="titleForm noneForm" id="cerrarSesion">Cerrar Sesion</h3>
-                    <form hidden class="formNew" action="/deleteSesion?m=DELETE" method="post">
+                    <form hidden class="formNew" action="/logout" method="get" id="formLogOut">
                         <input hidden type="text" name="" id="" value="<%= locals.userLogged.id %>">
                         <button class="enviar" type="submit">Enviar</button>
                         
@@ -111,9 +158,10 @@
 <script>
     let tituloDeFormulario = document.querySelectorAll('.dinamicTitle')
     let btnCerrarSesion = document.getElementById('cerrarSesion')
+    let formLogOut = document.querySelector('#formLogOut')
 
     btnCerrarSesion.addEventListener('click',(e) => {
-        
+        formLogOut.submit()
     })
 
     tituloDeFormulario.forEach(titulo => {
@@ -136,7 +184,8 @@
 <script>
     const headerTotal = document.getElementById('header')
     let pathname = window.location.pathname
-    const urlImage  = '/images/bannerInicio.jpg'
+    const rutaImagen = document.getElementById('rutaImagen')
+    const urlImage  = rutaImagen.value
 
     if(pathname == '/funcionesAdministrador') {
         headerTotal.style.backgroundImage = `linear-gradient(

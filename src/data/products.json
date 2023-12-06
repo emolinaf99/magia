@@ -1,39 +1,46 @@
 [
-    {
-        "id": 1,
-        "name": "Vela 1",
-        "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-        "tamaño": "85 gr",
-        "precio": 25000,
-        "categoria": 1,
-        "imagenPrincipal": "/images/rojoCirculo.jpg",
-        "imagenDos": "",
-        "imagenTres": ""
-        
-    },
-    {
-        "id": 2,
-        "name": "Vela 2",
-        "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-        "tamaño": "120 gr",
-        "precio": 45000,
-        "categoria": 1,
-        "imagenPrincipal": "/images/rojoPeq.jpg",
-        "imagenDos": "",
-        "imagenTres": ""
-        
-    },
-    {
-        "id": 3,
-        "name": "Vela 3",
-        "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-        "tamaño": "250 gr",
-        "precio": 88000,
-        "categoria": 1,
-        "imagenPrincipal": "/images/amarilloPeq.jpg",
-        "imagenDos": "",
-        "imagenTres": ""
-        
-    }
-
+ {
+  "id": 1,
+  "name": "Vela 1",
+  "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  "presentacion": "85 gr",
+  "precio": 25000,
+  "categoria": 1,
+  "imagenPrincipal": "/images/rojoCirculo.jpg",
+  "imagenDos": "",
+  "imagenTres": ""
+ },
+ {
+  "id": 2,
+  "name": "Vela 2",
+  "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  "presentacion": "120 gr",
+  "precio": 45000,
+  "categoria": 1,
+  "imagenPrincipal": "/images/rojoPeq.jpg",
+  "imagenDos": "",
+  "imagenTres": ""
+ },
+ {
+  "id": 3,
+  "name": "Vela 3",
+  "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+  "presentacion": "250 gr",
+  "precio": 88000,
+  "categoria": 1,
+  "imagenPrincipal": "/images/amarilloPeq.jpg",
+  "imagenDos": "",
+  "imagenTres": ""
+ },
+ {
+  "id": 4,
+  "name": "Producto 1",
+  "descripcion": "es un producto de ensayo",
+  "presentacion": "250 gr",
+  "precio": "50000",
+  "categoria": "4",
+  "imagenPrincipal": "/images/imagenPrincipal-1701897736593-631093069.png",
+  "imagenDos": "/images/imagenDos-1701897736595-117820944.jpg",
+  "imagenTres": "/images/imagenTres-1701897612287-830605324.jpg"
+ }
 ]

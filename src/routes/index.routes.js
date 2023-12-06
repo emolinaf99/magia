@@ -6,13 +6,18 @@ const userController = require('../controllers/userController')
 
 const authMiddleware = require('../middlewares/auth.middleware')
 const guestMiddleware = require('../middlewares/guest.middleware')
+const upload = require('../middlewares/multer');
 
 const validationsLogin = require('../validations/login')
 
 router.get("/", controller.vistaPaginaPrincipal);
 router.get("/loginAdminMagia",guestMiddleware, controller.loginAdmin);
 router.get("/funcionesAdministrador",authMiddleware, userController.funcionesAdministradorVista);
-router.get("/deleteSesion",authMiddleware, userController.logout);
+router.get("/logout",authMiddleware, userController.logout);
+
+
+router.put('/bannerChange', authMiddleware, upload.single('imagenBanner'), controller.editarBannerPrincipal)
+router.put('/bannerTextChange', authMiddleware, controller.editarTextoAnimado)
 
 router.post("/formularioContacto", controller.formularioGoogleSheet);
 router.post("/loginProcess", validationsLogin, userController.loginProcess);

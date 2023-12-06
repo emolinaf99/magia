@@ -6,9 +6,9 @@
             <% let categoriaEncontrada = categorias.find(categoria => categoria.id == category) %>
             <% if (categoriaEncontrada) { %>
                 <title><%= categoriaEncontrada.name %></title>
-               
+                <input type="hidden" id="rutaImagenCategoria" value="<%= categoriaEncontrada.imgBanner %>">
             <% } %>
-           <% } %>
+        <% } %>
         
     </head>
      
@@ -62,7 +62,9 @@
 <script>
     const headerTotal = document.getElementById('header')
     let pathname = window.location.pathname
-    const urlImage  = '/images/velaCerca.jpg'
+    const rutaImagen = document.getElementById('rutaImagenCategoria')
+    const urlImage  = rutaImagen.value
+
 
     if(pathname.includes('/productos') ) {
         headerTotal.style.backgroundImage = `linear-gradient(

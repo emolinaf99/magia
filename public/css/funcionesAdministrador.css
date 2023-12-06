@@ -24,7 +24,8 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 2rem;
+    padding: 2rem 1rem;
+    padding-top: 0;
 }
 
 .formBlockInput {

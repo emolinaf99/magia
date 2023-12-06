@@ -2,6 +2,7 @@ const products = require("../models/products.model");
 const categorias = require("../models/categories.model"); 
 const scentses = require("../models/scents.model"); 
 const User = require("../models/user.model"); 
+const paginaPrincipalInfo = require("../models/principalPage.model"); 
 
 const {unlinkSync} = require('fs');
 const {resolve,path} = require('path');
@@ -59,15 +60,22 @@ const controller = {
     },
 
     funcionesAdministradorVista: async (req,res) => {
+        let informacionPaginaInicio = paginaPrincipalInfo.findByPk(1)
+
         return res.render('functionsAdmin',{
-            categorias: await categorias.all()
+            categorias: await categorias.all(),
+            informacionPaginaInicio: informacionPaginaInicio
         })
     },
 
     logout: (req, res) => {
-        res.clearCookie("adminUser");
-        req.session.destroy();
-        return res.redirect("/");
+        try {
+            res.clearCookie('adminUser');
+            req.session.destroy();
+            return res.redirect('/')
+        } catch (err) {
+            console.log(err);
+        }
     },
 }
 

@@ -144,7 +144,7 @@ h4 {
     position: fixed;
     left: 78%;
     color: #D95A4D;
-    z-index: 10000000000000000000;
+    z-index: 9999;
     bottom: 2rem;
 }
 

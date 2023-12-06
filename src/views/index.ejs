@@ -8,13 +8,12 @@
     <body>
         <header id="header">
             <%- include ('./partials/header.ejs') %>
-            
+            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.imagenBanner %>">
         </header>
         <section class="contenedor">
             <div class="bloque-texto">
-                <p class="animation">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                </p>
+                <p class="animation"><%= informacionPaginaInicio.textoBanner %></p>
+                
             </div>
         </section>
          
@@ -25,11 +24,7 @@
                 </div>
                
             </section>
-            <section class="contenedorMenu">
-                
-                
-                
-            </section>
+            
 
             <section class="contenedorMenu">
                 <div class="contenedor2Vacios">
@@ -55,8 +50,9 @@
 
 <script>
     const headerTotal = document.getElementById('header')
+    const rutaImagen = document.getElementById('rutaImagen')
     let pathname = window.location.pathname
-    const urlImage  = '/images/bannerInicio.jpg'
+    const urlImage  = rutaImagen.value
 
     if(pathname == '/') {
         headerTotal.style.backgroundImage = `linear-gradient(
