@@ -42,6 +42,12 @@ server.use(express.json()) // recibir json
 server.use(require('./routes/index.routes.js'));
 server.use(require('./routes/products.routes.js'));
 
+//500 Manejo de Errores no Capturados:
+server.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
+
 //404
 server.use((req,res,next)=> {
     let categoriasDB = categorias.all()
