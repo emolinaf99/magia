@@ -177,6 +177,7 @@ const controller = {
     },
 
     eliminarCategoria: (req,res) => {
+        console.log(req.headers);
         let allCategories = categories.all()
         let categoryFound = allCategories.find(e => e.id == req.params.idCategory)
 
