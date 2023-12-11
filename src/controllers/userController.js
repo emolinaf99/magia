@@ -1,6 +1,6 @@
-const products = require("../models/products.model"); 
+const productos = require("../models/products.model"); 
 const categorias = require("../models/categories.model"); 
-const scentses = require("../models/scents.model"); 
+const aromas = require("../models/scents.model"); 
 const User = require("../models/user.model"); 
 const paginaPrincipalInfo = require("../models/principalPage.model"); 
 
@@ -64,6 +64,17 @@ const controller = {
 
         return res.render('functionsAdmin',{
             categorias: await categorias.all(),
+            aromas: await aromas.all(),
+            informacionPaginaInicio: informacionPaginaInicio
+        })
+    },
+
+    loginAdmin: (req,res) => {
+        let informacionPaginaInicio = paginaPrincipalInfo.findByPk(1)
+        let categoriasDB = categorias.all()
+
+        return res.render('login', {
+            categorias: categoriasDB,
             informacionPaginaInicio: informacionPaginaInicio
         })
     },

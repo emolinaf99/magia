@@ -10,6 +10,7 @@
         <div class="bloqueTitle t2">
             <p>Ingreso</p>
         </div>
+        <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.imagenBanner %>">
     </header>
 
     <main class="mainLogin">
@@ -56,8 +57,9 @@
 <!-- Script para banner de header -->
 <script>
     const headerTotal = document.getElementById('header')
+    const rutaImagen = document.getElementById('rutaImagen')
     let pathname = window.location.pathname
-    const urlImage  = '/images/bannerInicio.jpg'
+    const urlImage  = rutaImagen.value
 
     if(pathname == '/loginAdminMagia') {
         headerTotal.style.backgroundImage = `linear-gradient(

@@ -2,21 +2,6 @@
  {
   "id": 1,
   "name": "Velas",
-  "imgBanner": "/images/bannerVelas.jpg"
- },
- {
-  "id": 2,
-  "name": "Ambientadores",
-  "imgBanner": "/images/bannerVelas.jpg"
- },
- {
-  "id": 3,
-  "name": "Difusores",
-  "imgBanner": "/images/bannerVelas.jpg"
- },
- {
-  "id": 4,
-  "name": "Sin Nombre",
-  "imgBanner": "/images/imgBannerCategory-1701876471554-366150656.jpg"
+  "imgBanner": "/images/imgBannerCategory-1702276499839-903468709.jpg"
  }
 ]

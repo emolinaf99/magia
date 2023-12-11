@@ -146,3 +146,9 @@ select {
     z-index: 9999999;
     display: none;
 }
+
+/* Estilo básico para los input radio */
+input[type="radio"] {
+    height: 20px;
+    width: 20px; /* Espaciado entre el radio y el texto */
+}

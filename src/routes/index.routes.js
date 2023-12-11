@@ -11,7 +11,7 @@ const upload = require('../middlewares/multer');
 const validationsLogin = require('../validations/login')
 
 router.get("/", controller.vistaPaginaPrincipal);
-router.get("/loginAdminMagia",guestMiddleware, controller.loginAdmin);
+router.get("/loginAdminMagia",guestMiddleware, userController.loginAdmin);
 router.get("/funcionesAdministrador",authMiddleware, userController.funcionesAdministradorVista);
 router.get("/logout",authMiddleware, userController.logout);
 

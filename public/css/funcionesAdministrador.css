@@ -9,6 +9,20 @@
     gap: 2rem;
 }
 
+.dinamicTitle{
+    cursor: pointer;
+}
+
+.contenedorRadios {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 0.3 1rem;
+}
+
 .contFormNew h3 {
     color: white;
     width: 100%;

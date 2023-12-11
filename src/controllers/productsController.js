@@ -44,7 +44,7 @@ const controller = {
         let array = []
 
         productos.forEach(producto => {
-            if(producto.id == req.body.idProducto) {
+            if(producto.id == req.params.idProducto) {
 
                 let imagenPrincipalAnterior = producto.imagenPrincipal
                 let imagenDosAnterior = producto.imagenDos
@@ -58,15 +58,18 @@ const controller = {
                     try {
                         if(req.files.imagenPrincipal){
                             fs.promises.unlink(joinPath + imagenPrincipalAnterior)
+                            console.log('Imagen principal eliminada')
                         }
                         if(req.files.imagenDos){
                             fs.promises.unlink(joinPath + imagenDosAnterior)
+                            console.log('Imagen dos eliminada')
                         }
                         if(req.files.imagenTres){
                             fs.promises.unlink(joinPath + imagenTresAnterior)
+                            console.log('Imagen tres eliminada')
                         }
                         
-                        console.log('Archivo(s) eliminados')
+                        
                     }catch(err) {
                         console.error('Ha ocurrido un error eliminando las imagenes anteriores',err)
                     }
@@ -76,6 +79,7 @@ const controller = {
                 let data = {
                     ...producto,
                     name: req.body.name,
+                    categoria: req.body.categoria,
                     descripcion: req.body.descripcion,
                     presentacion: req.body.presentacion,
                     precio: req.body.precio,
@@ -99,11 +103,142 @@ const controller = {
         }
         
 
-        
+        return res.redirect(`/detalle/${req.params.idProducto}`)
 
-        
+    },  
 
-        return res.redirect(`/detalle/${req.body.idProducto}`)
+    eliminarProducto: (req,res) => {
+        let allProducts = products.all()
+        let productFound = allProducts.find(e => e.id == req.params.idProduct)
+
+        // Construye la ruta del archivo de la foto anterior
+        let joinPath = join(__dirname, '../../public')
+        let fotoProductoPrincipal = productFound.imagenPrincipal
+        let fotoProductoDos = productFound.imagenDos
+        let fotoProductoTres = productFound.imagenTres
+
+        try {
+            fs.promises.unlink(joinPath + fotoProductoPrincipal)
+            fs.promises.unlink(joinPath + fotoProductoDos)
+            fs.promises.unlink(joinPath + fotoProductoTres)
+        
+            let finalProducts = allProducts.filter(e => e.id != req.params.idProduct)
+            fs.writeFileSync(products.FileName, JSON.stringify(finalProducts, null, ' '));
+        } catch(err) {
+            console.error('Ha ocurrido un error eliminando el producto');
+        }
+
+        return res.redirect("/");
+    },
+
+    editarCategoria: (req,res) => {
+        let idCategoria = req.params.idCategory
+        let allCategories = categories.all();
+        let array = []
+
+        console.log(req.body);
+
+        allCategories.forEach(category => {
+            if(category.id == idCategoria) {
+                // Construye la ruta del archivo de la foto de categoria
+                let joinPath = join(__dirname, '../../public')
+
+                let imagenAnterior = category.imgBanner
+                let nombreAnterior = category.name
+
+                try {
+                    // elimina la foto de la categoria
+                    fs.promises.unlink(joinPath + imagenAnterior)
+                } catch(err) {
+                    console.error('Ha ocurrido un error eliminando la imagen anterior de categoria',err);
+                }
+
+                let data = {
+                    ...category,
+                    name: req.body.categoryName != '' ? req.body.categoryName : nombreAnterior,
+                    imgBanner: req.file ? '/images/' + req.file.filename : imagenAnterior
+                }
+
+                array.push(data)
+            } else {
+                array.push(category)
+            }
+        })
+
+        try {
+            // Escribe la información actualizada en un archivo (por ejemplo, si paginaPrincipalInfo.FileName es una ruta válida)
+            fs.writeFileSync( categories.FileName, JSON.stringify(array, null, ' '))
+            // Reescribe la información anterior con la nueva en un archivo
+        }catch(err) {
+            console.error('Ha ocurrido un error guardando cambios en categorias: ',err)
+        }
+
+        return res.redirect(`/productos/${req.params.idCategory}`)
+    },
+
+    eliminarCategoria: (req,res) => {
+        let allCategories = categories.all()
+        let categoryFound = allCategories.find(e => e.id == req.params.idCategory)
+
+        // Construye la ruta del archivo de la foto de categoria
+        let joinPath = join(__dirname, '../../public')
+        let imagenCategoria = categoryFound.imgBanner
+        
+        let allProducts = products.all()
+        let productsWSameCategory = allProducts.filter(e => e.categoria == req.params.idCategory)
+
+        productsWSameCategory.forEach(product => {
+            let imagenPrincipal = product.imagenPrincipal
+            let imagenDos = product.imagenDos
+            let imagenTres = product.imagenTres
+
+            try {
+                // elimina las fotos del producto asociado a esa categoria
+                fs.promises.unlink(joinPath + imagenPrincipal)
+                fs.promises.unlink(joinPath + imagenDos)
+                fs.promises.unlink(joinPath + imagenTres)
+            } catch(err) {
+                console.error('Ha ocurrido un error con eliminando las imagenes del producto:'+ product + ' y el error es: ', err);
+            }
+
+            try {
+                // realiza cambios en JSON
+                let newListProducts = allProducts.filter(e => e.categoria != req.params.idCategory)
+                fs.writeFileSync(products.FileName, JSON.stringify(newListProducts, null, ' '));
+            } catch(err) {
+                console.error('Ha ocurrido un error realizando cambios en la tabla productos y el error es: ', err);
+            }
+            
+        })
+
+        try {
+            // elimina la foto de la categoria
+            fs.promises.unlink(joinPath + imagenCategoria)
+
+            // realiza cambios en JSON
+            let finalCategories = allCategories.filter(e => e.id != req.params.idCategory)
+            fs.writeFileSync(categories.FileName, JSON.stringify(finalCategories, null, ' '));
+        }catch (err) {
+            console.error('Ha ocurrido un error al eliminar la categoria', err);
+        }
+
+        return res.redirect("/");
+    },
+
+    eliminarAroma: (req,res) =>{
+        console.log(req.body);
+        let todosLosAromas = scentses.all()
+
+        try {
+            // realiza cambios en JSON
+            let newListScents = todosLosAromas.filter(e => e.id != Number(req.body.aroma))
+
+            fs.writeFileSync(scentses.FileName, JSON.stringify(newListScents, null, ' '));
+        } catch(err) {
+            console.error('Ha ocurrido un error eliminando un aroma y el error es: ', err);
+        }
+
+        res.redirect('/funcionesAdministrador')
 
     },  
 

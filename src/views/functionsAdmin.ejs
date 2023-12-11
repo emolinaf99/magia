@@ -25,7 +25,7 @@
 
                         <div class="formBlockInput">
                             <label for="">Imagen Banner:</label>
-                            <input class="inputForm" type="file" name="imagenBanner">
+                            <input class="inputForm" type="file" name="imagenBanner" accept=".png, .jpg, .jpeg">
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -80,15 +80,15 @@
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Principal:</label>
-                            <input class="inputForm" type="file" name="imagenPrincipal" >
+                            <input class="inputForm" type="file" name="imagenPrincipal" accept=".png, .jpg, .jpeg" >
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Dos:</label>
-                            <input class="inputForm" type="file" name="imagenDos" >
+                            <input class="inputForm" type="file" name="imagenDos" accept=".png, .jpg, .jpeg">
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Tres:</label>
-                            <input class="inputForm" type="file" name="imagenTres" >
+                            <input class="inputForm" type="file" name="imagenTres" accept=".png, .jpg, .jpeg">
                         </div>
                         <button class="enviar" type="submit">Enviar</button>
                         
@@ -105,7 +105,7 @@
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Categoria:</label>
-                            <input class="inputForm" type="file" name="imgBannerCategory">
+                            <input class="inputForm" type="file" name="imgBannerCategory" accept=".png, .jpg, .jpeg">
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -128,14 +128,34 @@
                     </form>
                 </div>
 
+
+                <!-- Formulario eliminar una fragancia -->
+                <div class="contFormNew">
+                    <h3 class="titleForm noneForm dinamicTitle">Eliminar Aroma</h3>
+                    <form class="formNew" action="/deleteScent?m=DELETE" method="post">
+
+                        <% if (aromas.length > 0) { %>
+                         <% aromas.forEach(aroma => { %>
+                            <div class="contenedorRadios">
+                                <label for=""><%= aroma.name %></label>
+                                <input type="radio" name="aroma" value="<%= aroma.id %>">
+                            </div>
+                         <% }) %>
+                        <% } %>
+                        
+                        
+                        <button class="enviar" type="submit">Eliminar</button>
+                        
+                    </form>
+                </div>
+
                 <!-- Formulario Cerrar Sesión -->
                 <div class="contFormNew">
                     <h3 class="titleForm noneForm" id="cerrarSesion">Cerrar Sesion</h3>
-                    <form hidden class="formNew" action="/logout" method="get" id="formLogOut">
-                        <input hidden type="text" name="" id="" value="<%= locals.userLogged.id %>">
-                        <button class="enviar" type="submit">Enviar</button>
+                    <form hidden class="formNew" action="/logout" method="get" id="formLogOut"></form>
                         
-                    </form>
+                        
+                    
                 </div>
 
                 

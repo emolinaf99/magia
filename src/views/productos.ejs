@@ -30,6 +30,44 @@
         <main class="mainIndex">
 
             <section class="contenedorMenu">
+                <% if (locals.userLogged) { %>
+
+                    <div class="contenedorEdit" id="editForm">
+                        <div class="titleMsgTemporal">
+                            <p>Formulario Editar Categoria</p>
+                            <p class="x">X</p>
+                        </div>
+                        <div class="contenedorFormEditProd">
+                            <form class="formNew" action="/editCategory/<%= category %>?m=PUT" method="post" enctype="multipart/form-data">
+                                <div class="formBlockInput">
+                                    <label for="">Nombre de la Categoria:</label>
+                                    <% if (categorias.length > 0) { %>
+                                        <% let categoriaEncontrada = categorias.find(e => e.id == category) %>
+                                        <input class="inputForm" type="text" name="categoryName" value="<%= categoriaEncontrada.name %>" >
+                                    <% } %>
+                                </div>
+                                <div class="formBlockInput">
+                                    <label for="">Imagen Categoria:</label>
+                                    <input class="inputForm" type="file" name="imgBannerCategory" accept=".png, .jpg, .jpeg">
+                                </div>
+                                
+                                <button class="enviar" type="submit">Enviar</button>
+                                
+                            </form>
+                        </div>
+                        
+                    </div>
+
+                    <div class="botonesArea" >
+                        <a class="btn80 BGorange" href="#editCategoryForm" id="botonEditar">Editar</a>
+                        
+                        <form class="formDelete" action="/eliminarCategoria/<%= category %>?m=DELETE" method="post">
+                            <button class="btn80 BGred" type="submit">Eliminar</button>
+                        </form>
+                        
+                    </div>
+                <% } %>
+
                 <div class="contenedorProductos">
                     <% if (productos.length > 0) { %>
                         <% productos.forEach(producto => { %>
@@ -58,6 +96,41 @@
 
      
 </html>
+
+<!-- script para mostrar y ocultar formulario editar producto -->
+<script>
+
+    let btnEditar = document.querySelector('#botonEditar')
+    let formularioEditarContenedor = document.querySelector('.contenedorEdit')
+    let cover_ctn = document.getElementById("cover-ctn");
+    let equis = document.querySelector('.x')
+    let formularioEditar = document.querySelector('.formNew')
+
+    if(btnEditar){
+        btnEditar.addEventListener('click',() => { // boton editar escucha click
+            formularioEditarContenedor.style.display = 'flex'
+            cover_ctn.style.display = 'flex'
+            formularioEditar.style.display = 'flex'
+        })
+    }
+
+    
+
+    cover_ctn.addEventListener('click',() => { // fondo oscuro escucha click
+        cover_ctn.style.display = 'none'
+        formularioEditarContenedor.style.display = 'none'
+        formularioEditar.style.display = 'none'
+    })
+
+    if(equis){
+        equis.addEventListener('click',() => { // equis de formulario editar producto escucha click
+            cover_ctn.style.display = 'none'
+            formularioEditarContenedor.style.display = 'none'
+            formularioEditar.style.display = 'none'
+        })
+    }
+
+</script>
 
 <script>
     const headerTotal = document.getElementById('header')

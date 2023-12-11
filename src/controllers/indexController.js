@@ -74,17 +74,6 @@ const controller = {
 
     },
 
-    loginAdmin: (req,res) => {
-
-        let categoriasDB = categorias.all()
-
-        return res.render('login', {
-            categorias: categoriasDB
-        })
-    },
-
-    
-
     formularioGoogleSheet: (req,res) => {
         console.log(JSON.stringify(req.body));
     },

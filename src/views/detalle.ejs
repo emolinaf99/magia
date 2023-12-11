@@ -66,8 +66,7 @@
                             <p class="x">X</p>
                         </div>
                         <div class="contenedorFormEditProd">
-                            <form class="formNew " action="/editProduct?m=PUT" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="idProducto" value="<%= producto.id %>">
+                            <form class="formNew " action="/editProduct/<%= producto.id  %>?m=PUT" method="post" enctype="multipart/form-data">
 
                                 <div class="formBlockInput">
                                     <label for="">Nombre del Producto:</label>
@@ -102,15 +101,15 @@
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Imagen Principal:</label>
-                                    <input class="inputForm" type="file" name="imagenPrincipal" >
+                                    <input class="inputForm" type="file" name="imagenPrincipal" accept=".png, .jpg, .jpeg" >
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Imagen Dos:</label>
-                                    <input class="inputForm" type="file" name="imagenDos" >
+                                    <input class="inputForm" type="file" name="imagenDos" accept=".png, .jpg, .jpeg">
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Imagen Tres:</label>
-                                    <input class="inputForm" type="file" name="imagenTres" >
+                                    <input class="inputForm" type="file" name="imagenTres" accept=".png, .jpg, .jpeg">
                                 </div>
                                 <button class="enviar" type="submit">Enviar</button>
                                 
@@ -121,8 +120,11 @@
 
                     <div class="botonesArea" >
                         <a class="btn80 BGorange" href="#editProductForm" id="botonEditar">Editar</a>
-    
-                        <button class="btn80 BGred" type="submit">Eliminar</button>
+                        
+                        <form class="formDelete" action="/eliminarProducto/<%= producto.id %>?m=DELETE" method="post">
+                            <button class="btn80 BGred" type="submit">Eliminar</button>
+                        </form>
+                        
                     </div>
                 <% } %>
 
@@ -196,11 +198,14 @@
     let equis = document.querySelector('.x')
     let formularioEditar = document.querySelector('.formNew')
 
-    btnEditar.addEventListener('click',() => { // boton editar escucha click
-        formularioEditarContenedor.style.display = 'flex'
-        cover_ctn.style.display = 'flex'
-        formularioEditar.style.display = 'flex'
-    })
+    if(btnEditar){
+        btnEditar.addEventListener('click',() => { // boton editar escucha click
+            formularioEditarContenedor.style.display = 'flex'
+            cover_ctn.style.display = 'flex'
+            formularioEditar.style.display = 'flex'
+        })
+
+    }
 
     cover_ctn.addEventListener('click',() => { // fondo oscuro escucha click
         cover_ctn.style.display = 'none'
@@ -208,11 +213,14 @@
         formularioEditar.style.display = 'none'
     })
 
-    equis.addEventListener('click',() => { // equis de formulario editar producto escucha click
-        cover_ctn.style.display = 'none'
-        formularioEditarContenedor.style.display = 'none'
-        formularioEditar.style.display = 'none'
-    })
+    if(equis) {
+        equis.addEventListener('click',() => { // equis de formulario editar producto escucha click
+            cover_ctn.style.display = 'none'
+            formularioEditarContenedor.style.display = 'none'
+            formularioEditar.style.display = 'none'
+        })
+    }
+    
 </script>
 
 <!-- Script para poner la imagen del header al cargar la pagina-->
