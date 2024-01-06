@@ -19,7 +19,7 @@ router.get("/logout",authMiddleware, userController.logout);
 router.put('/bannerChange', authMiddleware, upload.single('imagenBanner'), controller.editarBannerPrincipal)
 router.put('/bannerTextChange', authMiddleware, controller.editarTextoAnimado)
 
-router.post("/formularioContacto", controller.formularioGoogleSheet);
+router.post("/formularioContacto", controller.formularioMayorista);
 router.post("/loginProcess", validationsLogin, userController.loginProcess);
 
 

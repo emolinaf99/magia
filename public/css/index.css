@@ -13,6 +13,10 @@
     background-color: #D95A4D;
 }
 
+.contenedorMenu h3 {
+    color: #D95A4D;
+}
+
 .bloque-texto {
     display: block;
     padding:  0.5rem 1rem; 
@@ -93,7 +97,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     margin-bottom: 3rem;
     margin-top: 0rem;
 }

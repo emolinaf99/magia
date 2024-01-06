@@ -8,11 +8,11 @@
     <body>
         <header id="header">
             <%- include ('./partials/header.ejs') %>
-            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.imagenBanner %>">
+            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.ImagenBanner %>">
         </header>
         <section class="contenedor">
             <div class="bloque-texto">
-                <p class="animation"><%= informacionPaginaInicio.textoBanner %></p>
+                <p class="animation"><%= informacionPaginaInicio.TextoBanner %></p>
                 
             </div>
         </section>
@@ -24,8 +24,31 @@
                 </div>
                
             </section>
-            
 
+            <section class="contenedorMenu">
+                <h3>Nuestros Productos</h3>
+                <div class="contenedorProductos">
+                    
+                    <% if (categorias.length > 0) { %>
+                        <% categorias.forEach(categoria => { %>
+                            <div class="contenedorGeneralProducto">
+                                <a class="bloqueProduct" href="/productos/<%= categoria.Id %>">
+                                    <img src="<%= categoria.ImgBanner %>" alt="">
+                                    
+                                </a>
+                                <div class="infoProduct">
+                                    <p><%= categoria.Name %></p>
+                                </div>
+                            </div>
+                            
+                        <% }) %>
+                    <% } else { %>
+                        <p>No hay categorias aún</p>
+                    <% } %>
+                    
+                </div>
+            </section>
+            
             <section class="contenedorMenu">
                 <div class="contenedor2Vacios">
                     <div class="contenedoVacio"></div>

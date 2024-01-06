@@ -1,6 +1,4 @@
-const products = require("../models/products.model"); 
-const categories = require("../models/categories.model"); 
-const scentses = require("../models/scents.model"); 
+const db = require('../database/models/index'); // trae toda la base de datos
 
 const {unlinkSync} = require('fs');
 const {resolve,path,join} = require('path');
@@ -9,23 +7,40 @@ const fs = require('fs'); // acceder a archivos
 const controller = {
 
     vistaProductos: async (req,res) => {
-        let productos = products.all()
-        let categorias = categories.all()
-        let productosFiltrados = productos.filter(product => product.categoria == req.params.idCategoria)
+
+        let categorias = await db.Categorias.findAll()
+       
+        let categoria = await db.Categorias.findOne({
+            where: {
+                Id: req.params.idCategoria
+            }
+        })
+        let productosFiltrados = await db.Productos.findAll({
+            where: {
+                Categoria: req.params.idCategoria
+            }
+        })
+
+        // console.log(JSON.stringify(categorias,null,2));
 
         return res.render('productos', {
             productos: productosFiltrados,
             categorias: categorias,
-            category: req.params.idCategoria
+            categoria: categoria
         })
         
     },
 
-    detalleProducto: (req,res) => {
-        let todosLosAromas = scentses.all()
-        let categorias = categories.all()
-        let productos = products.all()
-        let productoEncontrado = productos.find(producto => producto.id == req.params.idProducto)
+    detalleProducto: async (req,res) => {
+        let todosLosAromas = await db.Esencias.findAll()
+        let categorias = await db.Categorias.findAll()
+        let productos = db.Productos.findAll()
+        let productoEncontrado = await db.Productos.findOne({
+            where: {
+                Id: req.params.idProducto
+            },
+            include:[{association:'Producto_Categoria'}]
+        })
 
         return res.render('detalle', {
             aromas: todosLosAromas,
@@ -37,209 +52,239 @@ const controller = {
     editarProducto: (req,res) => {
         // console.log(req.body);
         // console.log(req.files);
-        
-       
-        let productos = products.all()
 
-        let array = []
-
-        productos.forEach(producto => {
-            if(producto.id == req.params.idProducto) {
-
-                let imagenPrincipalAnterior = producto.imagenPrincipal
-                let imagenDosAnterior = producto.imagenDos
-                let imagenTresAnterior = producto.imagenTres
-
-                // Construye la ruta del archivo de la foto anterior
-                let joinPath = join(__dirname, '../../public')
-
-                if(req.files) {
-
-                    try {
-                        if(req.files.imagenPrincipal){
-                            fs.promises.unlink(joinPath + imagenPrincipalAnterior)
-                            console.log('Imagen principal eliminada')
-                        }
-                        if(req.files.imagenDos){
-                            fs.promises.unlink(joinPath + imagenDosAnterior)
-                            console.log('Imagen dos eliminada')
-                        }
-                        if(req.files.imagenTres){
-                            fs.promises.unlink(joinPath + imagenTresAnterior)
-                            console.log('Imagen tres eliminada')
-                        }
-                        
-                        
-                    }catch(err) {
-                        console.error('Ha ocurrido un error eliminando las imagenes anteriores',err)
-                    }
-                }
-
-
-                let data = {
-                    ...producto,
-                    name: req.body.name,
-                    categoria: req.body.categoria,
-                    descripcion: req.body.descripcion,
-                    presentacion: req.body.presentacion,
-                    precio: req.body.precio,
-                    imagenPrincipal: req.files.imagenPrincipal ? '/images/' + req.files.imagenPrincipal[0].filename : imagenPrincipalAnterior,
-                    imagenDos: req.files.imagenDos ? '/images/' + req.files.imagenDos[0].filename : imagenDosAnterior,
-                    imagenTres: req.files.imagenTres ? '/images/' + req.files.imagenTres[0].filename : imagenTresAnterior,
-                }
-
-                array.push(data)
-            } else {
-                array.push(producto)
+        db.Productos.findOne({
+            where: {
+                Id: req.params.idProduct
             }
         })
+        .then((productoEncontrado) => {
+            let imagenPrincipalAnterior = productoEncontrado.ImagenPrincipal
+            let imagenDosAnterior = productoEncontrado.ImagenDos
+            let imagenTresAnterior = productoEncontrado.ImagenTres
 
-        try {
-            // Escribe la información actualizada en un archivo (por ejemplo, si paginaPrincipalInfo.FileName es una ruta válida)
-            fs.writeFileSync(products.FileName, JSON.stringify(array, null, ' '))
-            // Reescribe la información anterior con la nueva en un archivo
-        }catch(err) {
-            console.error('Ha ocurrido un error guardando cambios en productos: ',err)
-        }
-        
+            // Construye la ruta del archivo de la foto anterior
+            let joinPath = join(__dirname, '../../public')
 
-        return res.redirect(`/detalle/${req.params.idProducto}`)
+            if(req.files) {
+
+                try {
+                    if(req.files.imagenPrincipal){
+                        fs.promises.unlink(joinPath + imagenPrincipalAnterior)
+                        console.log('Imagen principal eliminada')
+                    }
+                    if(req.files.imagenDos){
+                        fs.promises.unlink(joinPath + imagenDosAnterior)
+                        console.log('Imagen dos eliminada')
+                    }
+                    if(req.files.imagenTres){
+                        fs.promises.unlink(joinPath + imagenTresAnterior)
+                        console.log('Imagen tres eliminada')
+                    }
+                    
+                    
+                }catch(err) {
+                    console.error('Ha ocurrido un error eliminando las imagenes anteriores',err)
+                }
+            }
+
+            db.Productos.update({
+                Name: req.body.name,
+                Categoria: req.body.categoria,
+                Descripcion: req.body.descripcion,
+                Presentacion: req.body.presentacion,
+                Precio: req.body.precio,
+                ImagenPrincipal: req.files.imagenPrincipal ? '/images/' + req.files.imagenPrincipal[0].filename : imagenPrincipalAnterior,
+                ImagenDos: req.files.imagenDos ? '/images/' + req.files.imagenDos[0].filename : imagenDosAnterior,
+                ImagenTres: req.files.imagenTres ? '/images/' + req.files.imagenTres[0].filename : imagenTresAnterior,
+            }, {
+                where: {
+                    Id: req.params.idProduct
+                }
+            })
+            .then((productoModificado) => {
+                console.log('El producto se ha editado exitosamente');
+                return res.redirect(`/detalle/${req.params.idProduct}`)
+            })
+        })
+        .catch((err) => {
+            console.error('Ha ocurrido un error modificando el producto: ' , err);
+            res.status(500).send('Ha ocurrido un error al editar el producto. Por favor, inténtalo de nuevo.', err);
+        })
 
     },  
 
     eliminarProducto: (req,res) => {
-        let allProducts = products.all()
-        let productFound = allProducts.find(e => e.id == req.params.idProduct)
-
-        // Construye la ruta del archivo de la foto anterior
-        let joinPath = join(__dirname, '../../public')
-        let fotoProductoPrincipal = productFound.imagenPrincipal
-        let fotoProductoDos = productFound.imagenDos
-        let fotoProductoTres = productFound.imagenTres
-
-        try {
-            fs.promises.unlink(joinPath + fotoProductoPrincipal)
-            fs.promises.unlink(joinPath + fotoProductoDos)
-            fs.promises.unlink(joinPath + fotoProductoTres)
         
-            let finalProducts = allProducts.filter(e => e.id != req.params.idProduct)
-            fs.writeFileSync(products.FileName, JSON.stringify(finalProducts, null, ' '));
-        } catch(err) {
-            console.error('Ha ocurrido un error eliminando el producto');
-        }
-
-        return res.redirect("/");
-    },
-
-    editarCategoria: (req,res) => {
-        let idCategoria = req.params.idCategory
-        let allCategories = categories.all();
-        let array = []
-
-        console.log(req.body);
-
-        allCategories.forEach(category => {
-            if(category.id == idCategoria) {
-                // Construye la ruta del archivo de la foto de categoria
-                let joinPath = join(__dirname, '../../public')
-
-                let imagenAnterior = category.imgBanner
-                let nombreAnterior = category.name
-
-                try {
-                    // elimina la foto de la categoria
-                    fs.promises.unlink(joinPath + imagenAnterior)
-                } catch(err) {
-                    console.error('Ha ocurrido un error eliminando la imagen anterior de categoria',err);
-                }
-
-                let data = {
-                    ...category,
-                    name: req.body.categoryName != '' ? req.body.categoryName : nombreAnterior,
-                    imgBanner: req.file ? '/images/' + req.file.filename : imagenAnterior
-                }
-
-                array.push(data)
-            } else {
-                array.push(category)
+        db.Productos.findOne({
+            where: {
+                Id: req.params.idProduct
             }
         })
+        .then((productFound) => {
+            // Construye la ruta del archivo de la foto anterior
+            let joinPath = join(__dirname, '../../public')
+            let fotoProductoPrincipal = productFound.ImagenPrincipal
+            let fotoProductoDos = productFound.ImagenDos
+            let fotoProductoTres = productFound.ImagenTres
 
+            try {
+                fs.promises.unlink(joinPath + fotoProductoPrincipal)
+                fs.promises.unlink(joinPath + fotoProductoDos)
+                fs.promises.unlink(joinPath + fotoProductoTres)
+            
+                db.Productos.destroy({
+                    where: {
+                        Id: req.params.idProduct
+                    }
+                })
+                .then((productoEliminado) => {
+                    console.log('Producto eliminado exitosamente');
+                    return res.redirect("/");
+                })
+
+            } catch(err) {
+                console.error('Ha ocurrido un error eliminando el producto');
+                res.status(500).send('Ha ocurrido un error al eliminar el producto. Por favor, inténtalo de nuevo.', err);
+            }
+
+        })
+
+    },
+
+    editarCategoria: async (req, res) => {
+        let idCategoria = req.params.idCategory;
+    
         try {
-            // Escribe la información actualizada en un archivo (por ejemplo, si paginaPrincipalInfo.FileName es una ruta válida)
-            fs.writeFileSync( categories.FileName, JSON.stringify(array, null, ' '))
-            // Reescribe la información anterior con la nueva en un archivo
-        }catch(err) {
-            console.error('Ha ocurrido un error guardando cambios en categorias: ',err)
-        }
+            const categoriaEncontrada = await db.Categorias.findOne({
+                where: {
+                    Id: idCategoria
+                }
+            });
+    
+            if (!categoriaEncontrada) {
+                return res.status(404).send('Categoría no encontrada');
+            }
+    
+            // Construye la ruta del archivo de la foto de categoría
+            let joinPath = join(__dirname, '../../public');
+    
+            let imagenAnterior = categoriaEncontrada.ImgBanner;
+            let nombreAnterior = categoriaEncontrada.Name;
 
-        return res.redirect(`/productos/${req.params.idCategory}`)
+            if(req.file) {
+                try {
+                    // Elimina la foto de la categoría
+                    await fs.promises.unlink(joinPath + imagenAnterior);
+                    console.log('Imagen anterior eliminada con éxito');
+                } catch (err) {
+                    console.error('Ha ocurrido un error eliminando la imagen anterior de categoría', err);
+                }
+            }
+    
+            await db.Categorias.update(
+                {
+                    Name: req.body.categoryName !== '' ? req.body.categoryName : nombreAnterior,
+                    ImgBanner: req.file ? '/images/' + req.file.filename : imagenAnterior,
+                },
+                {
+                    where: {
+                        Id: idCategoria
+                    }
+                }
+            ).then((categoriaEditada) => {
+                console.log('Categoria modificada exitosamente');
+                return res.redirect(`/productos/${req.params.idCategory}`);
+            })
+    
+            
+        } catch (error) {
+            console.error('Error en la función editarCategoria', error);
+            return res.status(500).send('Error interno del servidor');
+        }
     },
 
     eliminarCategoria: (req,res) => {
-        console.log(req.headers);
-        let allCategories = categories.all()
-        let categoryFound = allCategories.find(e => e.id == req.params.idCategory)
 
-        // Construye la ruta del archivo de la foto de categoria
-        let joinPath = join(__dirname, '../../public')
-        let imagenCategoria = categoryFound.imgBanner
-        
-        let allProducts = products.all()
-        let productsWSameCategory = allProducts.filter(e => e.categoria == req.params.idCategory)
-
-        productsWSameCategory.forEach(product => {
-            let imagenPrincipal = product.imagenPrincipal
-            let imagenDos = product.imagenDos
-            let imagenTres = product.imagenTres
-
-            try {
-                // elimina las fotos del producto asociado a esa categoria
-                fs.promises.unlink(joinPath + imagenPrincipal)
-                fs.promises.unlink(joinPath + imagenDos)
-                fs.promises.unlink(joinPath + imagenTres)
-            } catch(err) {
-                console.error('Ha ocurrido un error con eliminando las imagenes del producto:'+ product + ' y el error es: ', err);
+        db.Categorias.findOne({
+            where: {
+                Id: req.params.idCategory
             }
-
-            try {
-                // realiza cambios en JSON
-                let newListProducts = allProducts.filter(e => e.categoria != req.params.idCategory)
-                fs.writeFileSync(products.FileName, JSON.stringify(newListProducts, null, ' '));
-            } catch(err) {
-                console.error('Ha ocurrido un error realizando cambios en la tabla productos y el error es: ', err);
-            }
-            
         })
-
-        try {
-            // elimina la foto de la categoria
-            fs.promises.unlink(joinPath + imagenCategoria)
-
-            // realiza cambios en JSON
-            let finalCategories = allCategories.filter(e => e.id != req.params.idCategory)
-            fs.writeFileSync(categories.FileName, JSON.stringify(finalCategories, null, ' '));
-        }catch (err) {
-            console.error('Ha ocurrido un error al eliminar la categoria', err);
-        }
-
-        return res.redirect("/");
+        .then(async (categoryFound) => {
+            try {
+                // Construye la ruta del archivo de la foto de categoría
+                let joinPath = join(__dirname, '../../public');
+                let imagenCategoria = categoryFound.ImgBanner;
+    
+                let productsWSameCategory = await db.Productos.findAll({
+                    where: {
+                        Categoria: req.params.idCategory
+                    }
+                });
+    
+                await productsWSameCategory.forEach(product => {
+                    let imagenPrincipal = product.ImagenPrincipal;
+                    let imagenDos = product.ImagenDos;
+                    let imagenTres = product.ImagenTres;
+    
+                    try {
+                        // Elimina las fotos del producto asociado a esa categoría
+                        fs.promises.unlink(joinPath + imagenPrincipal);
+                        fs.promises.unlink(joinPath + imagenDos);
+                        fs.promises.unlink(joinPath + imagenTres);
+                    } catch (err) {
+                        console.error('Ha ocurrido un error eliminando las imágenes del producto: ' + product + ' y el error es: ', err);
+                    }
+    
+                });
+    
+                await db.Productos.destroy({
+                    where: {
+                        Categoria: req.params.idCategory
+                    }
+                });
+    
+                await db.Categorias.destroy({
+                    where: {
+                        Id: req.params.idCategory
+                    }
+                });
+    
+                try {
+                    // Elimina la foto de la categoría
+                    fs.promises.unlink(joinPath + imagenCategoria);
+                } catch (err) {
+                    console.error('Ha ocurrido un error al eliminar la categoría', err);
+                }
+    
+                console.log('Categoría eliminada');
+                return res.redirect("/");
+            } catch (error) {
+                console.error('Ha ocurrido un error en el proceso de eliminación de categoría', error);
+                return res.status(500).send('Error interno del servidor al eliminar la categoría',error);
+            }
+        });
+        
     },
 
-    eliminarAroma: (req,res) =>{
-        console.log(req.body);
-        let todosLosAromas = scentses.all()
-
+    eliminarAroma: async (req,res) =>{
+        //console.log(req.body);
+        
         try {
-            // realiza cambios en JSON
-            let newListScents = todosLosAromas.filter(e => e.id != Number(req.body.aroma))
-
-            fs.writeFileSync(scentses.FileName, JSON.stringify(newListScents, null, ' '));
+            db.Esencias.destroy({
+                where: {
+                    Id: Number(req.body.aroma)
+                }
+            }).then((aromaEliminado) => {
+                console.log('Aroma Eliminado');
+                res.redirect('/funcionesAdministrador')
+            })
         } catch(err) {
             console.error('Ha ocurrido un error eliminando un aroma y el error es: ', err);
         }
 
-        res.redirect('/funcionesAdministrador')
+        
 
     },  
 
@@ -248,46 +293,53 @@ const controller = {
         //console.log(req.files);
  
         try {
-            let newProduct = {
-                name: req.body.name,
-                descripcion: req.body.descripcion,
-                presentacion: req.body.presentacion,
-                precio: req.body.precio,
-                categoria: req.body.categoria,
-                imagenPrincipal: '/images/' + req.files.imagenPrincipal[0].filename,
-                imagenDos: '/images/' + req.files.imagenDos[0].filename,
-                imagenTres: '/images/' + req.files.imagenTres[0].filename 
-            };
-    
-            // Asegúrate de manejar correctamente las operaciones asíncronas (dependiendo de cómo esté implementado products.create)
-            products.create(newProduct);
+
+            db.Productos.create({
+                Name: req.body.name,
+                Descripcion: req.body.descripcion,
+                Presentacion: req.body.presentacion,
+                Precio: req.body.precio,
+                Categoria: req.body.categoria,
+                ImagenPrincipal: '/images/' + req.files.imagenPrincipal[0].filename,
+                ImagenDos: '/images/' + req.files.imagenDos[0].filename,
+                ImagenTres: '/images/' + req.files.imagenTres[0].filename 
+            }).then((productoCreado) => {
+                console.log(`El producto ${req.body.name} se ha creado exitosamente`);
+                // Redirige después de crear el nuevo producto
+
+                res.redirect('/funcionesAdministrador');
+            })
+            
+            
         } catch (err) {
             console.error('Ha ocurrido un error al crear el nuevo producto', err);
             // Maneja el error de alguna manera, por ejemplo, enviando una respuesta de error al cliente
-            return res.status(500).send('Error al crear el nuevo producto');
+            return res.status(500).send('Error al crear el nuevo producto', err);
         }
     
-        // Redirige después de crear el nuevo producto
-        res.redirect('/funcionesAdministrador');
+        
     },
 
     crearNuevaCategoria: (req,res) => {
 
         try {
 
-            let newCategory = {
-                categoryName: req.body.categoryName,
-                imgBanner: '/images/' + req.file.filename
-            }
+            db.Categorias.create({
+                Name: req.body.categoryName,
+                ImgBanner: '/images/' + req.file.filename
+            }).then((categoriaCreada) => {
+                console.log(`La categoria ${req.body.categoryName} se ha creado exitosamente`);
+                res.redirect('/funcionesAdministrador')
+            })
             
-            categories.create(newCategory)
+            
 
         } catch (err) {
             console.error('Ha ocurrido un error al crear la nueva categoria', err)
+            res.status(500).send('Ha ocurrido un error al crear la nueva categoria. Por favor, inténtalo de nuevo.', err);
         }
-        
 
-        res.redirect('/funcionesAdministrador')
+        
     },
 
     crearNuevaFragancia: (req,res) => {
@@ -295,17 +347,19 @@ const controller = {
 
         try {
 
-            let scentToCreate = {
-                nombreFragancia: req.body.nombreFragancia
-            }
-            
-            scentses.create(scentToCreate)
+            db.Esencias.create({
+                Name:  req.body.nombreFragancia
+            }).then((aromaCreado) => {
+                console.log(`El aroma ${req.body.nombreFragancia} se ha creado exitosamente`);
+                res.redirect('/funcionesAdministrador')
+            })
+
 
         } catch(err) {
             console.error('Ha ocurrido un error al crear la nueva fragancia', err)
+            res.status(500).send('Ha ocurrido un error al crear la nueva fragancia. Por favor, inténtalo de nuevo.', err);
         }
 
-        res.redirect('/funcionesAdministrador')
     }
 }
 

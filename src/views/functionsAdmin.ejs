@@ -11,7 +11,7 @@
             <div class="bloqueTitle t2">
                 <p>Funciones de Administrador</p>
             </div>
-            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.imagenBanner %>">
+            <input type="hidden" name="" id="rutaImagen" value="<%= informacionPaginaInicio.ImagenBanner %>">
         </header>
          
         <main class="mainIndex">
@@ -25,7 +25,7 @@
 
                         <div class="formBlockInput">
                             <label for="">Imagen Banner:</label>
-                            <input class="inputForm" type="file" name="imagenBanner" accept=".png, .jpg, .jpeg">
+                            <input class="inputForm" type="file" name="imagenBanner" accept=".png, .jpg, .jpeg" required>
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -40,7 +40,7 @@
                         
                         <div class="formBlockInput">
                             <label for="">Ingrese Nuevo Texto:</label>
-                            <textarea class="inputForm" name="textoAnimacion" id="" cols="30" rows="3"></textarea>
+                            <textarea class="inputForm" name="textoAnimacion" id="" cols="30" rows="3" required></textarea>
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -54,41 +54,41 @@
                     <form class="formNew " action="/createProduct" method="post" enctype="multipart/form-data">
                         <div class="formBlockInput">
                             <label for="">Nombre del Producto:</label>
-                            <input class="inputForm" type="text" name="name" autocomplete="off">
+                            <input class="inputForm" type="text" name="name" autocomplete="off" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Descripción:</label>
-                            <textarea class="inputForm" name="descripcion"  cols="30" rows="3"></textarea>
+                            <textarea class="inputForm" name="descripcion"  cols="30" rows="3" placeholder="Maximo 200 caracteres" required></textarea>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Tamaño:</label>
-                            <input class="inputForm" type="text" name="presentacion" autocomplete="off">
+                            <input class="inputForm" type="text" name="presentacion" autocomplete="off" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Categoria:</label>
-                            <select class="selectForm" name="categoria">
+                            <select class="selectForm" name="categoria" required>
                                 <% if (categorias.length > 0) { %>
                                  <% categorias.forEach(categoria => { %>
-                                    <option value="<%= categoria.id %>"><%= categoria.name %></option>
+                                    <option value="<%= categoria.Id %>"><%= categoria.Name %></option>
                                  <% }) %>
                                 <% } %>
                             </select>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Precio:</label>
-                            <input class="inputForm" type="text" name="precio" >
+                            <input class="inputForm" type="text" name="precio" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Principal:</label>
-                            <input class="inputForm" type="file" name="imagenPrincipal" accept=".png, .jpg, .jpeg" >
+                            <input class="inputForm" type="file" name="imagenPrincipal" accept=".png, .jpg, .jpeg" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Dos:</label>
-                            <input class="inputForm" type="file" name="imagenDos" accept=".png, .jpg, .jpeg">
+                            <input class="inputForm" type="file" name="imagenDos" accept=".png, .jpg, .jpeg" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Tres:</label>
-                            <input class="inputForm" type="file" name="imagenTres" accept=".png, .jpg, .jpeg">
+                            <input class="inputForm" type="file" name="imagenTres" accept=".png, .jpg, .jpeg" required>
                         </div>
                         <button class="enviar" type="submit">Enviar</button>
                         
@@ -101,11 +101,11 @@
                     <form class="formNew" action="/createCategory" method="post" enctype="multipart/form-data">
                         <div class="formBlockInput">
                             <label for="">Nombre de la Categoria:</label>
-                            <input class="inputForm" type="text" name="categoryName" autocomplete="off" >
+                            <input class="inputForm" type="text" name="categoryName" autocomplete="off" required>
                         </div>
                         <div class="formBlockInput">
                             <label for="">Imagen Categoria:</label>
-                            <input class="inputForm" type="file" name="imgBannerCategory" accept=".png, .jpg, .jpeg">
+                            <input class="inputForm" type="file" name="imgBannerCategory" accept=".png, .jpg, .jpeg" required>
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -115,12 +115,12 @@
 
                 <!-- Formulario crear nueva fragancia -->
                 <div class="contFormNew">
-                    <h3 class="titleForm noneForm dinamicTitle">Crear Nueva Fragancia</h3>
+                    <h3 class="titleForm noneForm dinamicTitle">Ingresar Nuevo Aroma</h3>
                     <form class="formNew" action="/createScent" method="post">
                         
                         <div class="formBlockInput">
                             <label for="">Nombre:</label>
-                            <input class="inputForm" type="text" name="nombreFragancia">
+                            <input class="inputForm" type="text" name="nombreFragancia" autocomplete="off" required>
                         </div>
                         
                         <button class="enviar" type="submit">Enviar</button>
@@ -137,8 +137,8 @@
                         <% if (aromas.length > 0) { %>
                          <% aromas.forEach(aroma => { %>
                             <div class="contenedorRadios">
-                                <label for=""><%= aroma.name %></label>
-                                <input type="radio" name="aroma" value="<%= aroma.id %>">
+                                <label for=""><%= aroma.Name %></label>
+                                <input type="radio" name="aroma" value="<%= aroma.Id %>" autocomplete="off">
                             </div>
                          <% }) %>
                         <% } %>

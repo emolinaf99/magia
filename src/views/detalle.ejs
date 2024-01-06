@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <%- include ('./partials/head.ejs') %> 
-        <title>Detalle - <%= producto.name %></title>
+        <title>Detalle - <%= producto.Name %></title>
     </head>
      
     <body>
@@ -21,12 +21,12 @@
                     <div class="imagesArea">
                         <div class="blockImages">
                             <div class="imgPrincipal">
-                                <img src="<%= producto.imagenPrincipal %>" alt="" id="imagenPrincipal">
+                                <img src="<%= producto.ImagenPrincipal %>" alt="" id="imagenPrincipal">
                             </div>
                             <div class="otrasFotos">
-                                <img src="<%= producto.imagenPrincipal %>" alt="" id="imagenPrincipalPequeña">
-                                <img src="<%= producto.imagenDos %>" alt="" id="segundaImagen">
-                                <img src="<%= producto.imagenTres %>" alt="" id="terceraImagen">
+                                <img src="<%= producto.ImagenPrincipal %>" alt="" id="imagenPrincipalPequeña">
+                                <img src="<%= producto.ImagenDos %>" alt="" id="segundaImagen">
+                                <img src="<%= producto.ImagenTres %>" alt="" id="terceraImagen">
                             </div>
                         </div>
                         
@@ -34,11 +34,11 @@
                     <div class="infoProducto">
                         <div class="bloqueInfoProd">
                             <div class="titleAndPrice">
-                                <h1><%= producto.name %></h1>
-                                <p>$<%= producto.precio %></p>
+                                <h1><%= producto.Name %></h1>
+                                <p>COP$ <%= new Intl.NumberFormat("es-CO").format(producto.Precio) %></p>
                             </div>
                             <div class="descriptionProduct">
-                                <p><%= producto.descripcion %></p>
+                                <p><%= producto.Descripcion %></p>
                             </div>
 
                             <div class="descriptionProduct mg2">
@@ -46,7 +46,7 @@
                                 <ul>
                                     <% if (aromas.length > 0) { %>
                                      <% aromas.forEach(aroma => { %>
-                                        <li><%= aroma.name %></li>
+                                        <li><%= aroma.Name %></li>
                                      <% }) %>
                                     <% } %>
                                     
@@ -66,19 +66,19 @@
                             <p class="x">X</p>
                         </div>
                         <div class="contenedorFormEditProd">
-                            <form class="formNew " action="/editProduct/<%= producto.id  %>?m=PUT" method="post" enctype="multipart/form-data">
+                            <form class="formNew " action="/editProduct/<%= producto.Id %>?m=PUT" method="post" enctype="multipart/form-data">
 
                                 <div class="formBlockInput">
                                     <label for="">Nombre del Producto:</label>
-                                    <input class="inputForm" type="text" name="name" value="<%= producto.name %>">
+                                    <input class="inputForm" type="text" name="name" value="<%= producto.Name %>">
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Descripción:</label>
-                                    <textarea class="inputForm" name="descripcion"  cols="30" rows="3"><%= producto.descripcion %></textarea>
+                                    <textarea class="inputForm" name="descripcion"  cols="30" rows="3"><%= producto.Descripcion %></textarea>
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Tamaño:</label>
-                                    <input class="inputForm" type="text" name="presentacion" value="<%= producto.presentacion %>">
+                                    <input class="inputForm" type="text" name="presentacion" value="<%= producto.Presentacion %>">
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Categoria:</label>
@@ -86,9 +86,9 @@
                                         <% if (categorias.length > 0) { %>
                                          <% categorias.forEach(categoria => { %>
                                             <% if (categoria.id == producto.categoria) { %>
-                                                <option selected value="<%= categoria.id %>"><%= categoria.name %></option>
+                                                <option selected value="<%= categoria.Id %>"><%= categoria.Name %></option>
                                             <% } else { %>
-                                                <option value="<%= categoria.id %>"><%= categoria.name %></option>
+                                                <option value="<%= categoria.Id %>"><%= categoria.Name %></option>
                                             <% } %>
                                             
                                          <% }) %>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Precio:</label>
-                                    <input class="inputForm" type="text" name="precio" value="<%= producto.precio %>">
+                                    <input class="inputForm" type="text" name="precio" value="<%= producto.Precio %>">
                                 </div>
                                 <div class="formBlockInput">
                                     <label for="">Imagen Principal:</label>
@@ -121,7 +121,7 @@
                     <div class="botonesArea" >
                         <a class="btn80 BGorange" href="#editProductForm" id="botonEditar">Editar</a>
                         
-                        <form class="formDelete" action="/eliminarProducto/<%= producto.id %>?m=DELETE" method="post">
+                        <form class="formDelete" action="/eliminarProducto/<%= producto.Id %>?m=DELETE" method="post">
                             <button class="btn80 BGred" type="submit">Eliminar</button>
                         </form>
                         

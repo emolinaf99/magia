@@ -1,54 +1,44 @@
 const {body} = require('express-validator');
-const User = require('../models/user.model');
+const db = require("../database/models/index");
 const bcrypt = require('bcryptjs');
 
-
 const user = body('user')
-.notEmpty().withMessage('Campo obligatorio!').bail()
+.notEmpty().withMessage('Campo obligatorio').bail()
 .custom((value, {req}) => {
-    
-    try {
-
-        let userToLogin = User.all()
-        let userFound = userToLogin.find(usuario => usuario.user == req.body.user);
-
-        console.log(userFound);
-        if (!userFound){
-            
-            throw new Error('Usuario incorrecto')
-        } else {
-            return true
+   return  db.User.findOne({
+        where:{
+            User:req.body.user
         }
-        
+    }).then((result)=>{
+        //console.log(result);
+        if (!result){
+            throw new Error('Este usuario no esta registrado')
+        }
+    }).catch((err)=>{
+        throw new Error('Este usuario no esta registrado')
+    })
 
-    } catch (err) {
-       throw new Error('Usuario incorrecto')
-    }
-    
 }); 
 
-const password = body('password').notEmpty().withMessage('Campo obligatorio!').bail() 
-.custom((value, {req}) => {
-
-    try {
-        
-        let userToLogin = User.findByField(req.body.user);
-        if (userToLogin){
-            let passwordOk = bcrypt.compareSync(req.body.password, userToLogin.password)
-
-            if(passwordOk == false) {
-                throw new Error('Contraseña incorrecta')
-            }
-            return true
+const password = body('password').notEmpty().withMessage('Campo obligatorio').bail()
+.custom((value, {req}) =>{
+    //console.log(req.body);
+   return db.User.findOne({
+        where:{
+            User: req.body.user
         }
-        
-
-    } catch (err) {
-       throw new Error('Contraseña incorrecta')
-    }
+    }).then((result) => {
     
-})
-
+        let passwordOk = bcrypt.compareSync(req.body.password, result.Password);
+        
+        if(passwordOk == false){
+            throw new Error('Contraseña incorrecta')
+        }
+        return true 
+    }).catch((err) => {
+        throw new Error('Contraseña incorrecta')
+    })
+}); 
 
 const validationsLogin = [user, password]
 

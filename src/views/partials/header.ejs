@@ -13,9 +13,9 @@
         <div class="contenedorProd">
             <li class="item" id="productosOptDesktop">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
             <ul class="listaProductos" id="listaProductosDesktop">
-                <% if (categorias) { %>
+                <% if (categorias.length > 0) { %>
                     <% categorias.forEach(categoria => { %>
-                        <a href="/productos/<%= categoria.id %>"><li><%= categoria.name %></li></a>
+                        <a href="/productos/<%= categoria.Id %>"><li><%= categoria.Name %></li></a>
                     <% }) %>
                 <% } %>
             </ul>
@@ -43,9 +43,9 @@
     <div class="contenedorProd">
         <li class="itemMobile" id="productosOptMobile">Productos<i class="fa-solid fa-chevron-down flecha"></i></li>
         <ul class="listaProductos" id="listaProductosMobile">
-            <% if (categorias) { %>
+            <% if (categorias.length) { %>
                 <% categorias.forEach(categoria => { %>
-                    <a href="/productos/<%= categoria.id %>"><li><%= categoria.name %></li></a>
+                    <a href="/productos/<%= categoria.Id %>"><li><%= categoria.Name %></li></a>
                 <% }) %>
             <% } %>
         </ul>

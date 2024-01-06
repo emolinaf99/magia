@@ -2,12 +2,12 @@
 <html lang="en">
     <head>
         <%- include ('./partials/head.ejs') %> 
-        <% if (categorias.length > 0) { %>
-            <% let categoriaEncontrada = categorias.find(categoria => categoria.id == category) %>
-            <% if (categoriaEncontrada) { %>
-                <title><%= categoriaEncontrada.name %></title>
-                <input type="hidden" id="rutaImagenCategoria" value="<%= categoriaEncontrada.imgBanner %>">
-            <% } %>
+        <% if (categoria) { %>
+            
+            
+            <title><%= categoria.Name %></title>
+            <input type="hidden" id="rutaImagenCategoria" value="<%= categoria.ImgBanner %>">
+            
         <% } %>
         
     </head>
@@ -16,11 +16,11 @@
         <header id="header">
             <%- include ('./partials/header.ejs') %>
             <div class="bloqueTitle t2">
-                <% if (categorias.length > 0) { %>
-                 <% let categoriaEncontrada = categorias.find(categoria => categoria.id == category) %>
-                 <% if (categoriaEncontrada) { %>
-                    <p><%= categoriaEncontrada.name %></p>
-                 <% } %>
+                <% if (categoria) { %>
+                 
+                 
+                    <p><%= categoria.Name %></p>
+                 
                 <% } %>
                 
             </div>
@@ -38,12 +38,12 @@
                             <p class="x">X</p>
                         </div>
                         <div class="contenedorFormEditProd">
-                            <form class="formNew" action="/editCategory/<%= category %>?m=PUT" method="post" enctype="multipart/form-data">
+                            <form class="formNew" action="/editCategory/<%= categoria.Id %>?m=PUT" method="post" enctype="multipart/form-data">
                                 <div class="formBlockInput">
                                     <label for="">Nombre de la Categoria:</label>
-                                    <% if (categorias.length > 0) { %>
-                                        <% let categoriaEncontrada = categorias.find(e => e.id == category) %>
-                                        <input class="inputForm" type="text" name="categoryName" value="<%= categoriaEncontrada.name %>" >
+                                    <% if (categoria) { %>
+                                        
+                                        <input class="inputForm" type="text" name="categoryName" value="<%= categoria.Name %>" >
                                     <% } %>
                                 </div>
                                 <div class="formBlockInput">
@@ -61,7 +61,7 @@
                     <div class="botonesArea" >
                         <a class="btn80 BGorange" href="#editCategoryForm" id="botonEditar">Editar</a>
                         
-                        <form class="formDelete" action="/eliminarCategoria/<%= category %>?m=DELETE" method="post">
+                        <form class="formDelete" action="/eliminarCategoria/<%= categoria.Id %>?m=DELETE" method="post">
                             <button class="btn80 BGred" type="submit">Eliminar</button>
                         </form>
                         
@@ -71,13 +71,17 @@
                 <div class="contenedorProductos">
                     <% if (productos.length > 0) { %>
                         <% productos.forEach(producto => { %>
-                            <a class="bloqueProduct" href="/detalle/<%= producto.id %>">
-                                <img src="<%= producto.imagenPrincipal %>" alt="">
+                            <div class="contenedorGeneralProducto">
+                                <a class="bloqueProduct" href="/detalle/<%= producto.Id %>">
+                                    <img src="<%= producto.ImagenPrincipal %>" alt="">
+                                    
+                                </a>
                                 <div class="infoProduct">
-                                    <p><%= producto.name %></p>
-                                    <p class="bold">$<%= producto.precio %></p>
+                                    <p><%= producto.Name %></p>
+                                    <p class="bold">$<%= producto.Precio %></p>
                                 </div>
-                            </a>
+                            </div>
+                            
                         <% }) %>
                     <% } else { %>
                         <p>No hay productos disponibles en esta categoria</p>

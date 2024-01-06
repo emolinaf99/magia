@@ -132,10 +132,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    position: absolute;
+    position: fixed;
     background-color:white;
     color: white;
-    top: 25%;
+    top: 0;
     right: 0;
     left: 0;
     border-top-right-radius: 10px;
@@ -275,7 +275,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        position: absolute;
+        position: fixed;
         background-color: white;
         color: white;
         top: 7rem;
@@ -415,7 +415,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        position: absolute;
+        position: fixed;
         background-color:white;
         color: white;
         top: 7rem;

@@ -1,8 +1,4 @@
-const productos = require("../models/products.model"); 
-const categorias = require("../models/categories.model"); 
-const aromas = require("../models/scents.model"); 
-const User = require("../models/user.model"); 
-const paginaPrincipalInfo = require("../models/principalPage.model"); 
+const db = require('../database/models/index'); // trae toda la base de datos
 
 const {unlinkSync} = require('fs');
 const {resolve,path} = require('path');
@@ -17,8 +13,12 @@ const controller = {
     loginProcess: async (req, res) => {
         //console.log(req.body);
 
-        let userToLogin = await User.findByField('user', req.body.user);
-        let categoriasDB =  await categorias.all()
+        let userToLogin = await db.User.findOne({
+            where: {
+                User: req.body.user
+            }
+        });
+        let categoriasDB =  await db.Categorias.findAll()
         
         const result = validationResult(req);
        
@@ -27,16 +27,20 @@ const controller = {
                 style: 'login',
                 errors: result.mapped(),
                 data: req.body,
-                categorias: categoriasDB
+                categorias: categoriasDB,
+                informacionPaginaInicio: await db.PrincipalPage.findOne({
+                    where: {
+                        Id: 1
+                    }
+                })
             })
         }
         
         if (userToLogin) {
             
-            let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password);
+            let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.Password);
             if (isOkThePassword) {
                 
-                delete userToLogin.password;
                 req.session.userLogged = userToLogin; // reescribe la info anterior por la nueva
                                             
                 if (req.body.remUser) {
@@ -53,28 +57,32 @@ const controller = {
             });
         }
         //console.log('tercer return');
-        return res.render("login", {
+        return res.render("/", {
             
             categorias: categoriasDB
         })
     },
 
     funcionesAdministradorVista: async (req,res) => {
-        let informacionPaginaInicio = paginaPrincipalInfo.findByPk(1)
+        let informacionPaginaInicio = await db.PrincipalPage.findOne()
+        let categorias =  await db.Categorias.findAll()
+        let aromas =  await db.Esencias.findAll()
+
+        // console.log(JSON.stringify(categorias,null,2));
 
         return res.render('functionsAdmin',{
-            categorias: await categorias.all(),
-            aromas: await aromas.all(),
+            categorias: categorias,
+            aromas: aromas,
             informacionPaginaInicio: informacionPaginaInicio
         })
     },
 
-    loginAdmin: (req,res) => {
-        let informacionPaginaInicio = paginaPrincipalInfo.findByPk(1)
-        let categoriasDB = categorias.all()
+    loginAdmin: async (req,res) => {
+        let informacionPaginaInicio = await db.PrincipalPage.findOne()
+        let categorias =  await db.Categorias.findAll()
 
         return res.render('login', {
-            categorias: categoriasDB,
+            categorias: categorias,
             informacionPaginaInicio: informacionPaginaInicio
         })
     },
